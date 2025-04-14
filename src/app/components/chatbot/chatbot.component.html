@@ -1,0 +1,96 @@
+<!-- chat-bot.component.html -->
+<div class="chat-container">
+  <header class="chat-header">
+    <div class="header-content">
+      <div class="bot-avatar">
+        <div class="bot-icon">🤖</div>
+      </div>
+      <h2 class="bot-name">{{ botName }}</h2>
+    </div>
+    <button class="reset-btn" (click)="resetChat()" aria-label="Reset chat">
+      <span class="reset-icon">🔄</span> New Conversation
+    </button>
+  </header>
+
+  <div class="messages-area">
+    <div class="messages-container" #messagesContainer>
+      <div
+        *ngFor="let message of messages"
+        class="message-wrapper"
+        [ngStyle]="{ 'align-self': message.isBot ? 'flex-start' : 'flex-end'}"
+      >
+        <div
+          class="message"
+          [ngClass]="{
+            'bot-message': message.isBot,
+            'user-message': !message.isBot
+          }"
+        >
+          <div class="message-bubble">
+            <div class="message-sender" *ngIf="message.isBot">
+              <div class="sender-avatar">🤖</div>
+              <span class="sender-name">{{ botName }}</span>
+            </div>
+            <div class="message-sender" *ngIf="!message.isBot">
+              <div class="sender-avatar">👤</div>
+              <span class="sender-name">You</span>
+            </div>
+            <div class="message-content">{{ message.content }}</div>
+            <div class="message-timestamp">
+              {{ message.timestamp | date : "shortTime" }}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="isTyping" class="message-wrapper bot-message">
+        <div class="message bot-message">
+          <div class="message-bubble">
+            <div class="message-sender">
+              <div class="sender-avatar">🤖</div>
+              <span class="sender-name">{{ botName }}</span>
+            </div>
+            <div class="typing-indicator">
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="chat-footer">
+    <div *ngIf="suggestions.length > 0" class="suggestion-chips">
+      <button
+        *ngFor="let suggestion of suggestions"
+        class="suggestion-chip"
+        (click)="selectSuggestion(suggestion)"
+        type="button"
+      >
+        {{ suggestion }}
+      </button>
+    </div>
+
+    <div class="chat-input-container">
+      <input
+        type="text"
+        class="chat-input"
+        [(ngModel)]="userInput"
+        (keyup.enter)="sendMessage()"
+        placeholder="Type a message..."
+        [disabled]="isTyping"
+        autocomplete="off"
+      />
+      <button
+        class="send-button"
+        [disabled]="!userInput.trim() || isTyping"
+        (click)="sendMessage()"
+        type="button"
+      >
+        <span class="send-icon">➤</span>
+      </button>
+    </div>
+  </div>
+</div>

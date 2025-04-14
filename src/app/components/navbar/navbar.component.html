@@ -1,0 +1,46 @@
+<header id="header" class="header d-flex align-items-center sticky-top">
+  <div
+    class="container-fluid container-xl position-relative d-flex align-items-center"
+  >
+  <img src="images/logo-abs-sm.png" alt="" class="me-4" width="50px" height="50px">
+    <a href="index.html" class="logo d-flex align-items-center me-auto">
+      <!-- <img src="assets/images/" alt="" class="rounded-circle"> -->
+      <h1 class="sitename">DIET CRAFT</h1>
+    </a>
+
+    <div [class.mobile-nav-active]="isActive" (click)="hideMobileNav()">
+      <nav class="navmenu">
+        <ul>
+          <li *ngFor="let link of navLinks">
+            <a [routerLink]="link.url" (click)="hideMobileNav()">{{ link.label }}</a>
+          </li>
+
+          <button
+            class="btn btn-outline-success btn-sm px-4 mx-3"
+            *ngIf="!isLoggedIn"
+            [routerLink]="['/login']"
+          >
+            Login
+            <i class="fa fa-sign-in"></i>
+          </button>
+          <button
+            class="btn btn-outline-danger btn-sm px-3 mx-3"
+            *ngIf="isLoggedIn"
+            (click)="logout()"
+          >
+            Logout
+            <i class="fa fa-sign-out"></i>
+          </button>
+        </ul>
+      </nav>
+    </div>
+  </div>
+
+  <span>
+    <i
+      class="mobile-nav-toggle d-xl-none"
+      [ngClass]="{ 'bi-list': !isActive, 'bi-x': isActive }"
+      (click)="toggleMobileNav()"
+    ></i>
+  </span>
+</header>

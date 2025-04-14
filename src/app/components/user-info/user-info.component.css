@@ -1,0 +1,31 @@
+body {
+    background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+}
+.card {
+    border-radius: 15px;
+    background: #fff;
+    transition: 0.3s;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    /* flex-direction: row;
+    justify-content: center;
+    align-items: center; */
+}
+.card:hover {
+    transform: scale(1.02);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+.form-control, .form-select {
+    border-radius: 10px;
+}
+.btn-primary {
+    background: linear-gradient(90deg, #007bff, #6610f2);
+    border: none;
+    border-radius: 10px;
+    padding: 12px;
+    font-size: 1.1rem;
+    transition: 0.3s;
+}
+.btn-primary:hover {
+    background: linear-gradient(90deg, #6610f2, #007bff);
+    transform: scale(1.05);
+}

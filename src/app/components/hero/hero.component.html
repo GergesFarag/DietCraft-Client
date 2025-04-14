@@ -1,0 +1,51 @@
+<!-- Hero Section -->
+<section id="hero" class="hero section">
+  <div class="container">
+    <div class="row gy-4">
+      <div
+        class="right-data col-lg-6 order-2 order-lg-1 d-flex flex-column justify-content-center"
+        data-aos="fade-up"
+      >
+        @if(user().username){
+        <div class="greetings mb-5">
+          <h1>Welcome back, {{ user().username }}!</h1>
+          <p>
+            We are glad to see you again, <br />
+            Start Your Journey With DietCraft NOW
+          </p>
+        </div>
+        }@else {
+          <div class="main mb-5">
+            <h1>DIET CRAFT</h1>
+            <p>
+              Your Intelligent Path for Balanced Nutrition and Healthy Living.
+              Providing you all you need in one platform.
+            </p>
+
+          </div>
+        }
+        <div class="d-flex">
+          <a href="#about" class="btn-get-started">Get Started</a>
+          <a
+            href="https://www.youtube.com/watch?v=Y7f98aduVJ8"
+            class="glightbox btn-watch-video d-flex align-items-center"
+          >
+            <i class="bi bi-play-circle"></i><span>Watch Video</span>
+          </a>
+        </div>
+      </div>
+      <div
+        class="col-lg-6 order-1 order-lg-2 hero-img"
+        data-aos="zoom-out"
+        data-aos-delay="100"
+      >
+        <img
+          src="/images/Untitled design.gif"
+          class="img-fluid animated d-block m-auto"
+          alt=""
+        />
+      </div>
+    </div>
+  </div>
+</section>
+<!-- /Hero Section -->

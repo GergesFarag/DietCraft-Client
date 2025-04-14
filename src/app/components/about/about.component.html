@@ -1,0 +1,37 @@
+<!-- About Section -->
+<section id="about" class="about section my-5">
+  <!-- Section Title -->
+  <div class="container section-title" data-aos="fade-up">
+    <h2>About</h2>
+  </div>
+  <!-- End Section Title -->
+  <div class="container my-3">
+    <div class="row gy-4">
+      <div
+        class="col-lg-6 position-relative align-self-start"
+        data-aos="fade-up"
+        data-aos-delay="100"
+      >
+        <img src="images/about-img.gif" class="img-fluid about-img" alt="" />
+        <!-- <a href="https://www.youtube.com/watch?v=Y7f98aduVJ8" class="glightbox pulsating-play-btn"></a> -->
+      </div>
+
+      <div class="col-lg-6 content" data-aos="fade-up" data-aos-delay="200">
+        <h3>{{ aboutInfo.title }}</h3>
+        <p class="fst-italic">
+          {{ aboutInfo.motivation }}
+        </p>
+        <ul>
+          <li *ngFor="let l of aboutInfo.objectives">
+            <i class="bi bi-check2-all"></i>
+            <span> {{ l }}</span>
+          </li>
+        </ul>
+        <p class="fst-italic">
+          {{ aboutInfo.conclusion }}
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- /About Section -->

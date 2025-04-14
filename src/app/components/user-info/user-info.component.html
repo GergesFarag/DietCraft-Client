@@ -1,0 +1,137 @@
+<div class="container my-5">
+  <div class="card p-4 shadow-lg flex-row align-items-center">
+    <h2 class="text-center me-4">
+      <i class="fas fa-user-circle text-primary"></i> Personal Information
+    </h2>
+
+    <div class="col-8">
+      <form [formGroup]="userInfoForm" (ngSubmit)="addUserInfo()">
+        <!-- Age -->
+        <div class="my-3">
+          <label class="form-label" for="age"
+            ><i class="fas fa-birthday-cake"></i> Age</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            id="age"
+            formControlName="age"
+            placeholder="Enter your age"
+            required
+          />
+        </div>
+
+        <!-- Weight -->
+        <div class="mb-3">
+          <label class="form-label" for="weight"
+            ><i class="fas fa-weight"></i> Weight (kg)</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            id="weight"
+            formControlName="weight"
+            placeholder="Enter your weight"
+            required
+          />
+        </div>
+
+        <!-- Height -->
+        <div class="mb-3">
+          <label class="form-label" for="height"
+            ><i class="fas fa-ruler-vertical"></i> Height (cm)</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            id="height"
+            formControlName="height"
+            placeholder="Enter your height"
+            required
+          />
+        </div>
+
+        <!-- Gender -->
+        <div class="mb-3">
+          <label class="form-label d-block" for="gender"
+            ><i class="fas fa-venus-mars"></i> Gender</label
+          >
+          <div class="btn-group w-100">
+            <input
+              type="radio"
+              class="btn-check"
+              id="gender"
+              formControlName="gender"
+              id="male"
+              value="true"
+              checked
+            />
+            <label class="btn btn-outline-primary" for="male"
+              ><i class="fas fa-mars"></i> Male</label
+            >
+
+            <input
+              type="radio"
+              class="btn-check"
+              formControlName="gender"
+              id="female"
+              value="false"
+            />
+            <label class="btn btn-outline-danger" for="female"
+              ><i class="fas fa-venus"></i> Female</label
+            >
+          </div>
+        </div>
+
+        <!-- Activity Level -->
+        <div class="mb-3">
+          <label class="form-label" for="activityLevel"
+            ><i class="fas fa-running"></i> Activity Level
+            <i
+              class="fas fa-info-circle text-muted"
+              data-bs-toggle="tooltip"
+              data-bs-placement="top"
+              title="Low: Sedentary, Medium: Moderate exercise, High: Heavy exercise"
+            ></i>
+          </label>
+          <select class="form-select" name="activityLevel" formControlName="activityLevel"  required>
+            <option value="" default disabled>Select option</option>
+            <option value={{l}} *ngFor="let l of activityLevel">{{ l }}</option>
+          </select>
+        </div>
+
+        <!-- Goal -->
+        <div class="mb-3">
+          <label class="form-label"><i class="fas fa-bullseye"></i> Goal</label>
+          <select class="form-select" name="goal" formControlName="goal" required >
+            <option value="" default disabled>Select option</option>
+            <option *ngFor="let key of goalKeys" [value]="goals[key]">{{ key }}</option>
+          </select>
+        </div>
+
+        <!-- Calories (Optional) -->
+        <div class="mb-3">
+          <label class="form-label"
+            ><i class="fas fa-fire"></i> Daily Calories (Optional)</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="calories"
+            placeholder="Enter calorie intake"
+          />
+        </div>
+
+        <!-- Error Message -->
+        <div *ngIf="errorMessage" class="alert alert-danger text-center">
+          {{ errorMessage }}
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit" class="btn btn-primary w-50 mt-3 d-block m-auto">
+          <i class="fas fa-paper-plane"></i> Submit
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
