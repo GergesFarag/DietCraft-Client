@@ -42,7 +42,13 @@
   width: 390px;
   padding: 15px;
 }
-
+.form-control {
+  border-radius: 15px
+}
+.form-control:focus{
+  box-shadow: 0 0 2px 0.1rem #10bc6942;
+  border-color: #10bc69;
+}
 /* .auth-wrapper .auth-content.multyform,
 .auth-wrapper .auth-content.subscribe {
   width: 750px;
@@ -65,7 +71,7 @@
 } */
 
 .auth-wrapper .auth-icon:before {
-  background: linear-gradient(-135deg, #1de9b6 0%, #1dc4e9 100%);
+  background: linear-gradient(-135deg, #1de968 0%, #127c0b 100%);
   background-clip: text;
   -webkit-background-clip: text;
   color: transparent;

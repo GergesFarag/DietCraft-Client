@@ -10,7 +10,7 @@ import { ScrollupComponent } from './components/scrollup/scrollup.component';
 import { AboutComponent } from './components/about/about.component';
 import { FeaturesComponent } from './components/features/features.component';
 import { HeroComponent } from './components/hero/hero.component';
-import { ServicesComponent } from './components/detailed-services/detailed-services.component';
+import { DetailedServicesComponent } from './components/detailed-services/detailed-services.component';
 import { CtaComponent } from './components/cta/cta.component';
 import { StatsComponent } from './components/stats/stats.component';
 import { PreloaderComponent } from './components/preloader/preloader.component';
@@ -30,6 +30,10 @@ import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { CookieService } from 'ngx-cookie-service';
 import { ChatBotComponent } from './components/chatbot/chatbot.component';
 import { AnimationBuilder, ɵBrowserAnimationBuilder } from '@angular/animations';
+import { ConfirmationComponent } from './components/confirmation/confirmation.component';
+import { ButtonComponent } from './unitComponents/button/button.component';
+import { ServicesComponent } from './components/services/services.component';
+import { DoubleSizeDirective } from './directives/double-size.directive';
 
 @NgModule({
   declarations: [
@@ -45,10 +49,14 @@ import { AnimationBuilder, ɵBrowserAnimationBuilder } from '@angular/animations
     HeroComponent,
     AboutComponent,
     FeaturesComponent,
-    ServicesComponent,
+    DetailedServicesComponent,
     CtaComponent,
     StatsComponent,
     ChatBotComponent,
+    ConfirmationComponent,
+    ButtonComponent,
+    ServicesComponent,
+    DoubleSizeDirective,
   ],
   imports: [
     BrowserModule,

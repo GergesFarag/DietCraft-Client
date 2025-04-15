@@ -6,9 +6,8 @@ body {
     background: #fff;
     transition: 0.3s;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    /* flex-direction: row;
-    justify-content: center;
-    align-items: center; */
+    width: 80%;
+    margin: 0 auto;
 }
 .card:hover {
     transform: scale(1.02);

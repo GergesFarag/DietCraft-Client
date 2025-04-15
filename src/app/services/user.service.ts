@@ -21,6 +21,7 @@ import { IUserVM } from '../vms/Iuser.vm';
 export class UserService {
   baseUrl: string = environment.apiUrl;
   userSignal:WritableSignal<IUserVM>;
+  loggingOutSignal:WritableSignal<boolean> = signal(false);
   constructor(
     private http: HttpClient,
     private cookieService: CookieService,

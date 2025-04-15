@@ -1,0 +1,13 @@
+<div class="overlay" (click)="hideConfirmation()">
+  <div class="confirmation-box" (click)="$event.stopPropagation()">
+    <div class="confirmation-icon mb-3"><i [class]="iconClass" [style.color]="iconColor"></i></div>
+    <h5 class="mb-2">{{head}}</h5>
+    <p class="text-muted mb-4">
+      {{message}}
+    </p>
+    <div class="d-flex justify-content-center gap-2">
+      <button class="btn btn-danger" (click)="confirmAction()">{{confirmText}}</button>
+      <button class="btn btn-secondary" (click)="cancelAction()">{{cancelText}}</button>
+    </div>
+  </div>
+</div>

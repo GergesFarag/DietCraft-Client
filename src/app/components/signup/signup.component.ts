@@ -5,6 +5,7 @@ import { UserService } from "../../services/user.service";
 import { CookieService } from "ngx-cookie-service";
 import { IUser } from "../../models/IUser";
 import { IUserVM } from "../../vms/Iuser.vm";
+import { AuthService } from "../../services/auth.service";
 
 @Component({
   selector: "app-signup",
@@ -21,6 +22,7 @@ export class SignupComponent {
   iClass: string = "fa-eye-slash";
 
   constructor(
+    private authService: AuthService,
     private fb: FormBuilder,
     private userService: UserService,
     private cookieService: CookieService,
@@ -73,15 +75,15 @@ export class SignupComponent {
       next: (response) => {
         console.log("Signup Response:", response); // ✅ Debugging log
         if (response?.message == "User Created Successfully !") {
-          let user: IUserVM = {
-            username: response.data.user.username,
-            email: response.data.user.email,
-            isAdmin: response.data.user.isAdmin,
-          };
-          // ✅ Use optional chaining to prevent crashes
-          this.cookieService.set("auth_token", response.refreshToken || ""); // ✅ Default value
-          this.userService.setUserInLS(user); // Store user in local storage
-          this.router.navigate(["/home"]);
+          let user:IUserVM = {
+            username : response.data.user.username,
+            email : response.data.user.email,
+            isAdmin : response.data.user.isAdmin
+          }
+          this.authService.setToken(response.data.accessToken)
+          this.userService.setCookie('refreshToken',response.data.user.refreshToken)  
+          this.userService.setUserInLS(user);
+            this.router.navigate(['/']);
         } else {
           this.errorMessage =
             response?.message ||

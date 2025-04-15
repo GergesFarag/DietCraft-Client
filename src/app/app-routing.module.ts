@@ -6,6 +6,7 @@ import { LoginComponent } from "./components/login/login.component";
 import { AuthGuard } from "./guards/auth.guard";
 import { UserInfoComponent } from "./components/user-info/user-info.component";
 import { ChatBotComponent } from "./components/chatbot/chatbot.component";
+import { ServicesComponent } from "./components/services/services.component";
 
 const routes: Routes = [
   { path: "", redirectTo: "/home", pathMatch: "full" }, // Redirect to home by default
@@ -14,6 +15,7 @@ const routes: Routes = [
   { path: "login", component: LoginComponent },
   { path: "user-info", component: UserInfoComponent, canActivate: [AuthGuard] }, // Protected route
   { path: "chatbot", component: ChatBotComponent, canActivate: [AuthGuard] }, // Protected route for chatbot
+  { path: "services", component: ServicesComponent}, // Protected route for services
   { path: "**", redirectTo: "/home" }, // Wildcard route (404 handling)
 ];
 

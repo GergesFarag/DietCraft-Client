@@ -82,13 +82,14 @@
 
           <!-- Buttons -->
           <div class="text-center mt-3">
-            <button
+            <app-button
+            label="Login"
+              appDoubleSize="5"
               type="submit"
-              class="btn btn-outline-primary w-50"
-              [disabled]="loginForm.invalid && loginForm.get('email')?.value !== 'admin'"
-            >
-              Log in
-            </button>
+              [disabled]="
+                loginForm.invalid && loginForm.get('email')?.value !== 'admin'
+              "
+            ></app-button>
           </div>
           <div class="text-center mt-3">
             <p class="text-muted">

@@ -38,9 +38,7 @@
     box-shadow: 0 8px 28px rgba(0, 0, 0, 0.1);
   }
   .hero .btn-get-started:hover {
-    color: var(--contrast-color);
-    background-color: var(--hover-color) !important;
-    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.1);
+    background-color: #096b3c;
   }
   
   .hero .btn-watch-video {
@@ -68,7 +66,7 @@
   }
   
   .hero .animated {
-    transform: scale(0.8);
+    transform: scale(0.7);
     animation: up-down 2s ease-in-out infinite alternate-reverse both;
   }
   @media (max-width: 640px) {
