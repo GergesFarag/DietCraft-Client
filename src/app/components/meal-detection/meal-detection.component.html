@@ -1,0 +1,124 @@
+<div class="uploader-parent">
+    <div class="uploader-container">
+        <div class="uploader-header">
+          <h1>Image Upload</h1>
+          <p class="subtitle">Upload your image to our service</p>
+        </div>
+      
+        <div class="uploader-content" *ngIf="!isLoading && !uploadComplete">
+          <div 
+            [ngClass]="dragAreaClass" 
+            (dragover)="onDragOver($event)" 
+            (dragleave)="onDragLeave($event)" 
+            (drop)="onDrop($event)"
+            [@pulse]="pulseState">
+            
+            <div class="instruction-container" *ngIf="!previewUrl">
+              <div class="upload-icon">
+                <svg width="64" height="64" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M21 15V19C21 19.5304 20.7893 20.0391 20.4142 20.4142C20.0391 20.7893 19.5304 21 19 21H5C4.46957 21 3.96086 20.7893 3.58579 20.4142C3.21071 20.0391 3 19.5304 3 19V15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M17 8L12 3L7 8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M12 3V15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+              <h3>Drag & Drop your image here</h3>
+              <p>or</p>
+              <div class="file-input-container">
+                <label for="fileInput" class="browse-btn">Browse Files</label>
+                <input type="file" id="fileInput" (change)="onFileSelect($event)" accept="image/*" hidden>
+              </div>
+              <p class="file-info">Supported formats: JPG, PNG, GIF</p>
+            </div>
+      
+            <div class="preview-container" *ngIf="previewUrl" [@fadeInOut]>
+              <div class="image-preview">
+                <img [src]="previewUrl"class="img-fluid" alt="Image preview">
+              </div>
+              <div class="file-info" *ngIf="selectedFile">
+                <div class="file-name">{{ selectedFile.name }}</div>
+                <div class="file-size">{{ (selectedFile.size / 1024 / 1024).toFixed(2) }} MB</div>
+              </div>
+              <div class="preview-actions">
+                <button class="cancel-btn" (click)="cancelUpload()">Cancel</button>
+                <button class="upload-btn" (click)="uploadFile()">Upload</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      
+        <div class="progress-container" *ngIf="isLoading" [@slideUpDown]>
+          <h3>Uploading your image...</h3>
+          <div class="progress-bar-container">
+            <div class="progress-bar" [style.width.%]="progressValue"></div>
+          </div>
+          <p class="progress-text">{{ progressValue }}%</p>
+        </div>
+      
+        <div class="success-container" *ngIf="uploadComplete" [@fadeInOut]>
+          <div class="success-icon">
+            <svg width="64" height="64" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M22 11.0799V11.9999C21.9988 14.1563 21.3005 16.2545 20.0093 17.9817C18.7182 19.7088 16.9033 20.9723 14.8354 21.5838C12.7674 22.1952 10.5573 22.1218 8.53447 21.3746C6.51168 20.6274 4.78465 19.2471 3.61096 17.4369C2.43727 15.6266 1.87979 13.4879 2.02168 11.3362C2.16356 9.18443 2.99721 7.13619 4.39828 5.49694C5.79935 3.85768 7.69279 2.71525 9.79619 2.24001C11.8996 1.76477 14.1003 1.9822 16.07 2.85986" stroke="#10BC69" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M22 4L12 14.01L9 11.01" stroke="#10BC69" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <h3>Upload Complete!</h3>
+          <p>Your image has been successfully uploaded.</p>
+          <button class="new-upload-btn" (click)="resetComponent()">Upload Another</button>
+        </div>
+      
+        <div class="error-container" *ngIf="uploadError" [@fadeInOut]>
+          <div class="error-icon">
+            <svg width="64" height="64" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="#FF5252" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M15 9L9 15" stroke="#FF5252" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M9 9L15 15" stroke="#FF5252" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <h3>Upload Failed</h3>
+          <p>{{ errorMessage }}</p>
+          <button class="try-again-btn" (click)="resetComponent()">Try Again</button>
+        </div>
+      
+        <div class="features-container" *ngIf="!isLoading && !uploadComplete && !previewUrl">
+          <div class="feature">
+            <div class="feature-icon">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M12 16V12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M12 8H12.01" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <h4>Instant Processing</h4>
+            <p>Images are processed in real-time with our advanced API</p>
+          </div>
+          <div class="feature">
+            <div class="feature-icon">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M18 8H19C20.0609 8 21.0783 8.42143 21.8284 9.17157C22.5786 9.92172 23 10.9391 23 12C23 13.0609 22.5786 14.0783 21.8284 14.8284C21.0783 15.5786 20.0609 16 19 16H18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M6 8H5C3.93913 8 2.92172 8.42143 2.17157 9.17157C1.42143 9.92172 1 10.9391 1 12C1 13.0609 1.42143 14.0783 2.17157 14.8284C2.92172 15.5786 3.93913 16 5 16H6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M6 12H18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <h4>Secure Transfer</h4>
+            <p>End-to-end encrypted uploads for your data security</p>
+          </div>
+          <div class="feature">
+            <div class="feature-icon">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M21 15V19C21 19.5304 20.7893 20.0391 20.4142 20.4142C20.0391 20.7893 19.5304 21 19 21H5C4.46957 21 3.96086 20.7893 3.58579 20.4142C3.21071 20.0391 3 19.5304 3 19V15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M7 10L12 15L17 10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M12 15V3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <h4>Multiple Formats</h4>
+            <p>Support for all major image formats with optimized compression</p>
+          </div>
+        </div>
+      </div>
+      <div class="result-container" [class.active]="imageSrc() !== ''">
+        <h1>Here is Your Result</h1>
+        <div class="image-container">
+            <img [src]='imageSrc()' alt="Image After Processing">
+        </div>
+      </div>
+</div>

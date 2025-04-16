@@ -1,0 +1,397 @@
+/* image-uploader/image-uploader.component.scss */
+:host {
+  --default-font: "Ubuntu", serif;
+  --heading-font: "Ubuntu", serif;
+  --nav-font: "Ubuntu", serif;
+  --background-color: #ffffff;
+  --default-color: #444444;
+  --heading-color: #5f687b;
+  --accent-color: #10bc69;
+  --surface-color: #ffffff;
+  --contrast-color: #ffffff;
+  --hover-color: #10bc69;
+  --light-gray: #f5f7fa;
+  --border-color: #e6e9ee;
+  --error-color: #ff5252;
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+
+* {
+  font-family: var(--default-font);
+  box-sizing: border-box;
+  text-decoration: none !important;
+}
+.uploader-parent{
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    font-size: smaller !important;
+    width: 100%;
+    background-color: var(--background-color);
+    padding: 1.2rem 1.5rem;
+    color: var(--default-color);
+}
+.uploader-container{
+  width: 50%;
+  max-width: 800px;
+  display: flex;
+  flex-direction: column;
+  padding: 2rem;
+  background-color: var(--background-color);
+  border-radius: 16px;
+  box-shadow: var(--shadow-lg);
+  color: var(--default-color);
+}
+
+.uploader-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+.uploader-header h1 {
+  font-family: var(--heading-font);
+  color: var(--heading-color);
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+.uploader-header .subtitle {
+  color: var(--default-color);
+  font-size: 1.1rem;
+  opacity: 0.8;
+}
+
+.dragarea,
+.dragarea-active {
+  position: relative;
+  width: 100%;
+  border: 2px dashed var(--border-color);
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  transition: all 0.3s ease;
+  background-color: var(--light-gray);
+  overflow: hidden;
+}
+.dragarea:hover,
+.dragarea-active:hover {
+  border-color: var(--accent-color);
+}
+
+.dragarea-active {
+  border-color: var(--accent-color);
+  background-color: rgba(16, 188, 105, 0.05);
+}
+
+.instruction-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+.instruction-container .upload-icon {
+  color: var(--accent-color);
+  margin-bottom: 1rem;
+  height: 64px;
+  width: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(16, 188, 105, 0.1);
+  border-radius: 50%;
+  padding: 1rem;
+}
+.instruction-container h3 {
+  font-family: var(--heading-font);
+  color: var(--heading-color);
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+.instruction-container p {
+  margin: 0.5rem 0;
+  color: var(--default-color);
+}
+.instruction-container .file-info {
+  margin-top: 1rem;
+  font-size: 0.875rem;
+  color: var(--default-color);
+  opacity: 0.7;
+}
+
+.file-input-container {
+  margin: 1rem 0;
+}
+
+.browse-btn {
+  display: inline-block;
+  background-color: var(--accent-color);
+  color: var(--contrast-color);
+  padding: 0.75rem 1.5rem;
+  border-radius: 30px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 10px rgba(16, 188, 105, 0.3);
+}
+.browse-btn:hover {
+  background-color: var(--hover-color);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(16, 188, 105, 0.4);
+}
+
+.preview-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.preview-container .image-preview {
+  width: 100%;
+  max-width: 400px;
+  margin-bottom: 1rem;
+  border-radius: 8px;
+  /* overflow: hidden; */
+  box-shadow: var(--shadow-md);
+}
+.preview-container .image-preview img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+.preview-container .file-info {
+  width: 100%;
+  max-width: 400px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem;
+  background-color: var(--light-gray);
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+}
+.preview-container .file-info .file-name {
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 70%;
+}
+.preview-container .file-info .file-size {
+  color: var(--default-color);
+  opacity: 0.7;
+}
+.preview-container .preview-actions {
+  display: flex;
+  gap: 1rem;
+}
+
+.cancel-btn {
+  padding: 0.75rem 1.5rem;
+  border-radius: 30px;
+  background-color: var(--light-gray);
+  color: var(--default-color);
+  border: none;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.cancel-btn:hover {
+  background-color: #e4e9f2;
+}
+
+.upload-btn,
+.new-upload-btn,
+.try-again-btn {
+  padding: 0.75rem 1.5rem;
+  border-radius: 30px;
+  background-color: var(--accent-color);
+  color: var(--contrast-color);
+  border: none;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 10px rgba(16, 188, 105, 0.3);
+}
+.upload-btn:hover,
+.new-upload-btn:hover,
+.try-again-btn:hover {
+  background-color: var(--hover-color);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(16, 188, 105, 0.4);
+}
+
+.progress-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 2rem;
+}
+.progress-container h3 {
+  font-family: var(--heading-font);
+  color: var(--heading-color);
+  margin-bottom: 1.5rem;
+}
+.progress-container .progress-bar-container {
+  width: 100%;
+  height: 8px;
+  background-color: var(--light-gray);
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 0.5rem;
+}
+.progress-container .progress-bar {
+  height: 100%;
+  background-color: var(--accent-color);
+  border-radius: 4px;
+  transition: width 0.3s ease;
+}
+.progress-container .progress-text {
+  font-weight: 500;
+  color: var(--accent-color);
+}
+
+.success-container,
+.error-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 2rem;
+}
+.success-container .success-icon,
+.success-container .error-icon,
+.error-container .success-icon,
+.error-container .error-icon {
+  margin-bottom: 1.5rem;
+}
+.success-container h3,
+.error-container h3 {
+  font-family: var(--heading-font);
+  color: var(--heading-color);
+  margin-bottom: 0.5rem;
+}
+.success-container p,
+.error-container p {
+  margin-bottom: 1.5rem;
+  color: var(--default-color);
+}
+
+.error-container .error-icon {
+  color: var(--error-color);
+}
+.error-container h3 {
+  color: var(--error-color);
+}
+
+.features-container {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 3rem;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+}
+.features-container .feature {
+  flex: 1;
+  min-width: 150px;
+  padding: 1rem;
+  background-color: var(--surface-color);
+  border-radius: 12px;
+  box-shadow: var(--shadow-sm);
+  text-align: center;
+  transition: all 0.3s ease;
+}
+.features-container .feature:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-md);
+}
+.features-container .feature .feature-icon {
+  color: var(--accent-color);
+  margin-bottom: 1rem;
+  height: 64px;
+  width: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(16, 188, 105, 0.1);
+  border-radius: 50%;
+  padding: 1rem;
+  margin: 0 auto 1rem;
+}
+.features-container .feature h4 {
+  font-family: var(--heading-font);
+  color: var(--heading-color);
+  margin-bottom: 0.5rem;
+}
+.features-container .feature p {
+  color: var(--default-color);
+  font-size: 0.9rem;
+  opacity: 0.8;
+}
+.result-container{
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 2rem;
+    max-height: 89vh;
+    opacity: 0;
+    transition: 0.9s ease-in-out;
+}
+.result-container.active{
+  opacity: 1;
+}
+.result-container .image-container{
+    width: 100%;
+    margin-bottom: 1rem;
+    border-radius: 8px;
+    height: 400px;
+    position: relative;
+    background-color: var(--light-gray);
+    padding: 1rem;
+    box-shadow: var(--shadow-md);
+}
+.result-container .image-container img{
+  width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+@media (max-width: 768px) {
+    .uploader-parent {
+      padding: 1rem;
+      flex-direction: column;
+    }
+  .uploader-container {
+    padding: 1.5rem;
+  }
+  .features-container {
+    flex-direction: column;
+  }
+  .features-container .feature {
+    width: 100%;
+  }
+}
+@media (max-width: 480px) {
+  .uploader-header h1 {
+    font-size: 2rem;
+  }
+  .dragarea,
+  .dragarea-active {
+    min-height: 250px;
+    padding: 1.5rem;
+  }
+  .preview-actions {
+    flex-direction: column;
+    width: 100%;
+  }
+  .preview-actions button {
+    width: 100%;
+  }
+}

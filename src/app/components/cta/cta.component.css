@@ -1,6 +1,3 @@
-/*--------------------------------------------------------------
-# Call To Action Section
---------------------------------------------------------------*/
 .call-to-action {
   padding: 80px 0;
   position: relative;
@@ -20,7 +17,7 @@
 
 .call-to-action:before {
   content: "";
-  background: color-mix(in srgb, var(--background-color), transparent 20%);
+  background: color-mix(in srgb, var(--background-color), transparent 60%);
   position: absolute;
   inset: 0;
   z-index: 2;
@@ -29,18 +26,13 @@
 .call-to-action .container {
   position: relative;
   z-index: 3;
+  color:rgba(34, 34, 34, 0.85);
 }
 
 .call-to-action h3 {
   font-size: 28px;
   font-weight: 700;
-  color: var(--default-color);
 }
-
-.call-to-action p {
-  color: var(--default-color);
-}
-
 .call-to-action .cta-btn {
   font-family: var(--heading-font);
   font-weight: 500;

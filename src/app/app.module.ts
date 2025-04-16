@@ -19,10 +19,7 @@ import { SignupComponent } from './components/signup/signup.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {
   HTTP_INTERCEPTORS,
-  HttpClient,
   HttpClientModule,
-  provideHttpClient,
-  withFetch,
 } from '@angular/common/http';
 import { provideRouter, RouterLink, RouterModule } from '@angular/router';
 import { UserInfoComponent } from './components/user-info/user-info.component';
@@ -34,6 +31,9 @@ import { ConfirmationComponent } from './components/confirmation/confirmation.co
 import { ButtonComponent } from './unitComponents/button/button.component';
 import { ServicesComponent } from './components/services/services.component';
 import { DoubleSizeDirective } from './directives/double-size.directive';
+import { MealDetectionComponent } from './components/meal-detection/meal-detection.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ContactComponent } from './components/contact/contact.component'; // Import the animations module
 
 @NgModule({
   declarations: [
@@ -57,6 +57,8 @@ import { DoubleSizeDirective } from './directives/double-size.directive';
     ButtonComponent,
     ServicesComponent,
     DoubleSizeDirective,
+    MealDetectionComponent,
+    ContactComponent,
   ],
   imports: [
     BrowserModule,
@@ -64,7 +66,8 @@ import { DoubleSizeDirective } from './directives/double-size.directive';
     ReactiveFormsModule,
     HttpClientModule,
     RouterModule,
-    FormsModule
+    FormsModule,
+    BrowserAnimationsModule, // Add BrowserAnimationsModule here
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },

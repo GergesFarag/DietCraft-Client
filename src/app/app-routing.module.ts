@@ -7,6 +7,9 @@ import { AuthGuard } from "./guards/auth.guard";
 import { UserInfoComponent } from "./components/user-info/user-info.component";
 import { ChatBotComponent } from "./components/chatbot/chatbot.component";
 import { ServicesComponent } from "./components/services/services.component";
+import { MealDetectionComponent } from "./components/meal-detection/meal-detection.component";
+import { ContactComponent } from "./components/contact/contact.component";
+import { AboutComponent } from "./components/about/about.component";
 
 const routes: Routes = [
   { path: "", redirectTo: "/home", pathMatch: "full" }, // Redirect to home by default
@@ -15,8 +18,19 @@ const routes: Routes = [
   { path: "login", component: LoginComponent },
   { path: "user-info", component: UserInfoComponent, canActivate: [AuthGuard] }, // Protected route
   { path: "chatbot", component: ChatBotComponent, canActivate: [AuthGuard] }, // Protected route for chatbot
-  { path: "services", component: ServicesComponent}, // Protected route for services
-  { path: "**", redirectTo: "/home" }, // Wildcard route (404 handling)
+  {
+    path: "services",
+    component: ServicesComponent,
+    canActivate: [AuthGuard], // Protected route for services
+    children: [
+      { path: "user-info", component: UserInfoComponent },
+      { path: "chatbot", component: ChatBotComponent },
+      { path: "meal-detection", component: MealDetectionComponent },
+    ],
+  },
+  { path: "contact", component: ContactComponent },
+  { path: "about", component: AboutComponent },
+  { path: "**", redirectTo: "/home" },
 ];
 
 @NgModule({

@@ -5,14 +5,13 @@
     width: 100%;
     min-height: 70vh;
     position: relative;
-    padding: 2.5rem 0 2.5rem 0;
     display: flex;
     align-items: center;
   }
   
   .hero h1 {
     margin: 0;
-    font-size: 48px;
+    font-size: 52px;
     font-weight: 700;
     line-height: 56px;
   }
@@ -29,7 +28,7 @@
     background: var(--accent-color);
     font-family: var(--heading-font);
     font-weight: 400;
-    font-size: 15px;
+    font-size: 20px;
     letter-spacing: 1px;
     display: inline-block;
     padding: 10px 28px 12px 28px;
@@ -66,7 +65,7 @@
   }
   
   .hero .animated {
-    transform: scale(0.7);
+    width: 450px;
     animation: up-down 2s ease-in-out infinite alternate-reverse both;
   }
   @media (max-width: 640px) {

@@ -1,9 +1,12 @@
 /*--------------------------------------------------------------
 # Disable aos animation delay on mobile devices
 --------------------------------------------------------------*/
+:host {
+  /* display: block; */
+  padding-top: 80px;
+}
 @media screen and (max-width: 768px) {
-    [data-aos-delay] {
-      transition-delay: 0 !important;
-    }
+  [data-aos-delay] {
+    transition-delay: 0 !important;
   }
-  
+}

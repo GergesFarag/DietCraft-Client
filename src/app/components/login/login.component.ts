@@ -3,13 +3,10 @@ import {
   FormBuilder,
   FormGroup,
   Validators,
-  ReactiveFormsModule,
 } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserService } from '../../services/user.service';
-import { CookieService } from 'ngx-cookie-service';
 import { IUser } from '../../models/IUser';
-import { AuthInterceptor } from '../../interceptors/auth.interceptor';
 import { AuthService } from '../../services/auth.service';
 import { IUserVM } from '../../vms/Iuser.vm';
 
@@ -47,7 +44,7 @@ export class LoginComponent {
       this.passwordFieldType === 'password' ? 'text' : 'password';
   }
 
-  loginUser(): void {
+  loginUser() {
     if (this.loginForm.invalid && this.loginForm.get('email')?.value !== 'admin') {
       this.errorMessage =
         'An error occurred, please check you have entered valid Email & Password.';
@@ -72,11 +69,11 @@ export class LoginComponent {
           this.userService.setUserInLS(user);
             this.router.navigate(['/']);
         } else {
-          this.errorMessage = response.message; // Display server-side message
+          this.errorMessage = response.message;
         }
       },
       error: (error) => {
-        this.errorMessage = error.message; // Display server-side error message
+        this.errorMessage = error.message;
       },
     });
   }

@@ -1,1 +1,30 @@
-<p>services works!</p>
+<!-- services.component.html -->
+<section class="services-section" *ngIf="!isChildRoute">
+  <div class="container">
+    <div class="section-header">
+      <h2>Our Innovative Services</h2>
+    </div>
+    <div class="services-grid">
+      <div class="service-card px-5" *ngFor="let service of services">
+        <div class="service-icon">
+          <i class="{{ service.icon }}"></i>
+        </div>
+        <div class="service-content">
+          <h3>{{ service.title }}</h3>
+          <p>{{ service.description }}</p>
+
+          <div class="service-features">
+            <ul>
+              <li *ngFor="let feature of service.features">{{ feature }}</li>
+            </ul>
+          </div>
+
+          <a routerLink="/services/{{ service.link }}" class="learn-more-btn"
+            >Explore it</a
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<router-outlet></router-outlet>

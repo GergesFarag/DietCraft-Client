@@ -1,19 +1,19 @@
 <!-- Services Section -->
-<section id="services" class="services section light-background my-5">
+<section id="services" class="services section light-background my-5 py-5">
   <!-- Section Title -->
   <div class="container section-title" data-aos="fade-up">
     <h2>Services</h2>
   </div>
   <!-- End Section Title -->
 
-  <div class="container my-3">
+  <div class="container my-5">
     <div class="row gy-4">
       <div class="col-lg-6 col-md-6" data-aos="fade-up" data-aos-delay="100">
         <div class="service-item position-relative">
           <div class="icon">
             <i class="bi bi-robot"></i>
           </div>
-          <a routerLink="/chatbot" class="stretched-link">
+          <a routerLink="/services/chatbot" class="stretched-link">
             <h3>ChatBot Assistant</h3>
           </a>
           <p>
@@ -29,8 +29,8 @@
           <div class="icon">
             <i class="bi bi-broadcast"></i>
           </div>
-          <a href="/user-info" class="stretched-link">
-            <h3>Clorie Calculation System</h3>
+          <a href="/services/user-info" class="stretched-link">
+            <h3>Calorie Calculation System</h3>
           </a>
           <p>
             This system will help you maintain diet and health. It will help you
@@ -39,7 +39,7 @@
         </div>
       </div>
       <!-- End Service Item -->
-       <app-button label="Explore more !" [Action]="navigateToServices" class="text-center"></app-button>
+       <app-button appDoubleSize="7" label="Explore more !" [Action]="navigateToServices" classes="mt-5" class="text-center"></app-button>
     </div>
   </div>
 </section>

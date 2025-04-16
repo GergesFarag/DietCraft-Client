@@ -5,8 +5,11 @@ button{
     cursor: pointer;
     text-align: center;
     font-size: 1rem;
-    transition: 1s ease;
+    transition: 0.5s ease-in-out;
 }
 button:hover{
     background-color: #056336 !important;
+}
+button:focus{
+    box-shadow: 0px 0px 20px #25ff96 !important;
 }

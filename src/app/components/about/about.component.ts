@@ -18,4 +18,9 @@ export class AboutComponent {
     ],
     conclusion:"Whether you’re looking to lose weight, gain energy, or simply eat healthier, our project is designed to support you every step of the way."
   };
+  milestones: {year:number , description:string}[] = [
+    { year: 2010, description: 'Company founded with a vision for innovation.' },
+    { year: 2015, description: 'Launched our flagship product.' },
+    { year: 2020, description: 'Expanded to international markets.' }
+  ];
 }

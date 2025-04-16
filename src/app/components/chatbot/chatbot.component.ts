@@ -56,6 +56,7 @@ export class ChatBotComponent implements OnInit, AfterViewChecked {
     this.userInput = "";
     this.suggestions = [];
     this.isTyping = true;
+    console.log("Sending message to OpenAI:", messageContent);
     this.openAIService
       .getResponse(messageContent)
       .pipe(
@@ -65,6 +66,7 @@ export class ChatBotComponent implements OnInit, AfterViewChecked {
       )
       .subscribe({
         next: (response: any) => {
+          console.log("Received response from OpenAI:", response);
           this.addMessage(response.message, true);
         },
         error: (error: Error) => {
