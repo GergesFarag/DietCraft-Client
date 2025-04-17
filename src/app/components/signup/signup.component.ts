@@ -32,11 +32,18 @@ export class SignupComponent {
   ngOnInit(): void {
     this.signUpForm = this.fb.group(
       {
-        username: ["", [Validators.required, Validators.minLength(4)]],
-        email: ["", [Validators.required, Validators.email]],
-        password: ["", [Validators.required, Validators.minLength(8)]],
-        confirmPassword: ["", Validators.required],
-        checked: [false, Validators.requiredTrue], // Ensure terms are checked
+      username: ["", [Validators.required, Validators.minLength(4)]],
+      email: ["", [Validators.required, Validators.email]],
+      password: [
+        "",
+        [
+        Validators.required,
+        Validators.minLength(8),
+        Validators.pattern(/^(?=.*[0-9])(?=.*[!@#$%^&*])(?=.*[A-Z]).*$/),
+        ],
+      ],
+      confirmPassword: ["", Validators.required],
+      checked: [false, Validators.requiredTrue], // Ensure terms are checked
       },
       { validators: this.passwordsMatch } // ✅ Apply validator correctly
     );
@@ -75,24 +82,28 @@ export class SignupComponent {
       next: (response) => {
         console.log("Signup Response:", response); // ✅ Debugging log
         if (response?.message == "User Created Successfully !") {
-          let user:IUserVM = {
-            username : response.data.user.username,
-            email : response.data.user.email,
-            isAdmin : response.data.user.isAdmin
-          }
-          this.authService.setToken(response.data.accessToken)
-          this.userService.setCookie('refreshToken',response.data.user.refreshToken)  
+          let user: IUserVM = {
+            username: response.data.user.username,
+            email: response.data.user.email,
+            isAdmin: response.data.user.isAdmin,
+          };
+          this.authService.setToken(response.data.accessToken);
+          this.userService.setCookie(
+            "refreshToken",
+            response.data.user.refreshToken
+          );
           this.userService.setUserInLS(user);
-            this.router.navigate(['/']);
+          this.router.navigate(["/"]);
         } else {
+          console.log("Gone Here in Debugggggg");
           this.errorMessage =
             response?.message ||
             "Something went wrong with Signing you up, please try again."; // ✅ Avoid undefined errors
         }
       },
       error: (error) => {
-        // console.error('Signup Error:', error); // ✅ Debugging log
-        this.errorMessage = error?.message || "An error occurred !";
+        console.log('Signup Error => ', error); // ✅ Debugging log
+        this.errorMessage = error?.error.message || "An error occurred !";
       },
     });
   }

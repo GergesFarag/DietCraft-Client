@@ -1,0 +1,233 @@
+<div class="profile-container">
+  <!-- Hero Section with User Info -->
+  <div class="profile-hero">
+    <div class="profile-info">
+      <div class="profile-image-container">
+        <img
+          [src]="user.profileImage || '/images/default-profile.png'"
+          alt="Profile Picture"
+          class="profile-image"
+        />
+        <div class="edit-overlay mb-4">
+          <button class="edit-btn" (click)="triggerFileInput()">
+            <i class="fas fa-camera "></i>
+          </button>
+          <input
+            type="file"
+            #fileInput
+            (change)="onFileSelected($event)"
+            hidden
+          />
+        </div>
+      </div>
+      <div class="profile-details">
+        <h1 class="username">{{ user.username || "Username" }}</h1>
+        <p class="email">
+          <i class="fas fa-envelope mx-2"></i> {{ user.email || "email@example.com" }}
+        </p>
+        <p class="member-since">
+          <i class="fas fa-calendar-alt mx-2"></i> Member since
+          {{ user.joinDate ? (user.joinDate | date : "mediumDate") : "January 2023" }}
+        </p>
+        <button *ngIf="userProfile" class="edit-profile-btn" (click)="openEditProfileModal()">
+          <i class="fas fa-edit"></i> Edit Profile
+        </button>
+      </div>
+    </div>
+  </div>
+  @if(userProfile){
+    <!-- Main Dashboard -->
+    <div class="dashboard">
+      <!-- Stats Cards Row -->
+      <div class="stats-row">
+        <div class="stat-card current">
+          <div class="stat-icon"><i class="fas fa-weight"></i></div>
+          <div class="stat-info">
+            <h3>Current Weight</h3>
+            <div class="stat-value">
+              {{ healthInfo?.currentWeight || "75" }} kg
+            </div>
+          </div>
+        </div>
+  
+        <div class="stat-card target">
+          <div class="stat-icon"><i class="fas fa-bullseye"></i></div>
+          <div class="stat-info">
+            <h3>Target Weight</h3>
+            <div class="stat-value">
+              {{ healthInfo?.targetWeight || "70" }} kg
+            </div>
+          </div>
+        </div>
+  
+        <div class="stat-card height">
+          <div class="stat-icon"><i class="fas fa-ruler-vertical"></i></div>
+          <div class="stat-info">
+            <h3>Height</h3>
+            <div class="stat-value">{{ healthInfo?.height || "175" }} cm</div>
+          </div>
+        </div>
+  
+        <div class="stat-card calories">
+          <div class="stat-icon"><i class="fas fa-fire"></i></div>
+          <div class="stat-info">
+            <h3>Daily Calories</h3>
+            <div class="stat-value">
+              {{ healthInfo?.dailyCalories || "2,400" }}
+            </div>
+          </div>
+        </div>
+      </div>
+  
+      <!-- Progress Section -->
+      <div class="progress-section">
+        <div class="section-header">
+          <h2>Progress Tracker</h2>
+          <div class="time-filter">
+            <button
+              [class.active]="timeFilter === 'week'"
+              (click)="setTimeFilter('week')"
+            >
+              Week
+            </button>
+            <button
+              [class.active]="timeFilter === 'month'"
+              (click)="setTimeFilter('month')"
+            >
+              Month
+            </button>
+            <button
+              [class.active]="timeFilter === 'year'"
+              (click)="setTimeFilter('year')"
+            >
+              Year
+            </button>
+          </div>
+        </div>
+  
+        <div class="charts-container">
+          <div class="chart weight-chart">
+            <h3>Weight Progress</h3>
+            <canvas id="weightChart"></canvas>
+          </div>
+  
+          <div class="chart calories-chart">
+            <h3>Calorie Intake</h3>
+            <canvas id="caloriesChart"></canvas>
+          </div>
+        </div>
+  
+        <div class="goal-progress">
+          <h3>Goal Progress</h3>
+          <div class="progress-bar-container">
+            <div class="progress-bar" [style.width.%]="calculateProgress()"></div>
+          </div>
+          <p class="progress-text">
+            {{ calculateProgress() }}% to your goal weight
+          </p>
+        </div>
+      </div>
+  
+      <!-- Two Column Layout for Activity and Nutrition -->
+      <div class="two-column-section">
+        <!-- Activity Level & Workouts -->
+        <div class="column activity-column">
+          <div class="activity-level-card">
+            <h3>Activity Level</h3>
+            <div class="activity-indicator">
+              <div
+                class="activity-bar"
+                [ngClass]="{
+                  light: healthInfo?.activityLevel === 'low',
+                  moderate: healthInfo?.activityLevel === 'medium',
+                  'very-active': healthInfo?.activityLevel === 'high'
+                }"
+              >
+                <div class="activity-label">
+                  {{ healthInfo?.activityLevel || "Moderate" }}
+                </div>
+              </div>
+            </div>
+            <p class="activity-description">{{ getActivityDescription() }}</p>
+          </div>
+  
+          <div class="recent-workouts">
+            <h3>Recent Workouts</h3>
+            <div class="workout-list">
+              <div class="workout-item" *ngFor="let workout of recentWorkouts">
+                <div class="workout-details">
+                  <h4>{{ workout.type }}</h4>
+                  <p>
+                    {{ workout.duration }} minutes •
+                    {{ workout.caloriesBurned }} calories
+                  </p>
+                </div>
+                <div class="workout-icon" [ngClass]="workout.type.toLowerCase()">
+                  <i [class]="getWorkoutIcon(workout.type)"></i>
+                </div>
+              </div>
+  
+              <div class="no-workouts" *ngIf="!recentWorkouts?.length">
+                <p>No recent workouts tracked</p>
+                <button class="add-workout-btn" (click)="addWorkout()">
+                  Add Workout
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+  
+        <!-- Nutrition & Health Metrics -->
+        <div class="column nutrition-column">
+          <div class="nutrition-card">
+            <h3>Nutrition Breakdown</h3>
+            <div class="nutrition-chart">
+              <canvas id="nutritionChart"></canvas>
+            </div>
+            <div class="nutrition-metrics">
+              <div class="metric">
+                <span class="metric-label">Protein</span>
+                <span class="metric-value"
+                  >{{ healthInfo?.nutrition?.protein || "120" }} Cal</span
+                >
+              </div>
+              <div class="metric">
+                <span class="metric-label">Carbs</span>
+                <span class="metric-value"
+                  >{{ healthInfo?.nutrition?.carbs || "250" }} Cal</span
+                >
+              </div>
+              <div class="metric">
+                <span class="metric-label">Fat</span>
+                <span class="metric-value"
+                  >{{ healthInfo?.nutrition?.fat || "60" }} Cal</span
+                >
+              </div>
+            </div>
+          </div>
+  
+          <div class="health-metrics-card">
+            <h3>Health Metrics</h3>
+            <div class="metrics-grid">
+              <div class="metric-item">
+                <div class="metric-icon"><i class="fas fa-bed"></i></div>
+                <div class="metric-name">Sleep</div>
+                <div class="metric-value">
+                  {{ healthInfo?.averageSleep || "7.5" }} hrs
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  }@else{
+    <div class="profile-placeholder">
+      <h2>Welcome to Your Profile</h2>
+      <p>Track your health and fitness journey here.</p>
+      <button class="get-started-btn" (click)="getStarted()">
+        Get Started
+      </button>
+    </div>
+  }
+</div>

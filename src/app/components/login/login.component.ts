@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component } from '@angular/core';
+import { ChangeDetectorRef, Component, OnDestroy } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -16,21 +16,27 @@ import { IUserVM } from '../../vms/Iuser.vm';
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',
 })
-export class LoginComponent {
+export class LoginComponent implements OnDestroy {
   loginForm!: FormGroup;
   errorMessage: string | null = null;
-
-  // Password visibility states
+  prevURL:string = '';
+  warningMessage: string | null = null;
   passwordFieldType: string = 'password';
   iClass: string = 'fa-eye-slash';
-
+  timeoOutSubs:number;
   constructor(
     private fb: FormBuilder,
     private userService: UserService,
     private router: Router,
-    private authService: AuthService
-  ) {}
-
+    private authService: AuthService,
+  ) {
+    const nav = this.router.getCurrentNavigation();
+    this.timeoOutSubs = this.warningMessage = nav?.extras?.state?.['fromGuard'] ?? null;
+    setTimeout(() => {
+      this.warningMessage = null;
+    },2000)
+  }
+  
   ngOnInit(): void {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
@@ -68,13 +74,16 @@ export class LoginComponent {
           this.userService.setCookie('refreshToken',response.data.user.refreshToken)  
           this.userService.setUserInLS(user);
             this.router.navigate(['/']);
-        } else {
-          this.errorMessage = response.message;
+          } else {
+            this.errorMessage = response.message;
         }
       },
       error: (error) => {
         this.errorMessage = error.message;
       },
     });
+  }
+  ngOnDestroy(): void {
+    clearTimeout(this.timeoOutSubs);
   }
 }

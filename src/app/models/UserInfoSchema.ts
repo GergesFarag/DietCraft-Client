@@ -1,14 +1,15 @@
 export enum Goals {
-  'Lose Weight' = 1,
-  'Maintain Weight' = 2,
-  'Gain Weight' = 3,
+  "Lose Weight" = 0,
+  "Maintain Weight" = 1,
+  "Gain Weight" = 2,
 }
 export interface UserInfoSchema {
-  age: { type: Number; required: true };
-  weight: { type: Number; required: true };
-  height: { type: Number; required: true };
-  gender: { type: Boolean; default: true };
-  activityLevel:  string , required: true ;
-  goal: { type: Goals; required: true };
-  calories?: Number | null;
+  age: number;
+  weight: number;
+  height: number;
+  gender: boolean;
+  activityLevel: string;
+  goal: Goals;
+  calories?: number | null;
+  targetWeight?: number;
 }

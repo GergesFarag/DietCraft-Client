@@ -48,7 +48,15 @@
   width: 390px;
   padding: 15px;
 }
-
+.neon-button{
+    background-color: var(--accent-color);
+    color: white;
+}
+.neon-button:hover{
+    background-color: color-mix(in srgb, var(--accent-color) , black 15%);
+    color: white;
+    box-shadow: 0 0 10px #39ff9f
+}
 /* .auth-wrapper .auth-content.multyform,
 .auth-wrapper .auth-content.subscribe {
   width: 750px;

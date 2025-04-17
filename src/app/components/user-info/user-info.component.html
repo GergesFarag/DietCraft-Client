@@ -1,4 +1,7 @@
-<div class="container my-5">
+<div class="container parent px-5 py-2 my-5">
+  <div class="left-content p-4 me-5">
+    <img class="cardio-img" src="/images/cardio-img.gif" alt="Cardio Image" />
+  </div>
   <div class="card p-4 shadow-lg flex-column align-items-center">
     <h2 class="text-center me-4">
       <i class="fas fa-user-circle text-primary"></i> Personal Information
@@ -93,21 +96,55 @@
               title="Low: Sedentary, Medium: Moderate exercise, High: Heavy exercise"
             ></i>
           </label>
-          <select class="form-select" name="activityLevel" formControlName="activityLevel"  required>
+          <select
+            class="form-select"
+            name="activityLevel"
+            formControlName="activityLevel"
+            required
+          >
             <option value="" default disabled>Select option</option>
-            <option value={{l}} *ngFor="let l of activityLevel">{{ l }}</option>
+            <option value="{{ l }}" *ngFor="let l of activityLevel">
+              {{ l }}
+            </option>
           </select>
         </div>
 
         <!-- Goal -->
         <div class="mb-3">
           <label class="form-label"><i class="fas fa-bullseye"></i> Goal</label>
-          <select class="form-select" name="goal" formControlName="goal" required >
+          <select
+            class="form-select"
+            name="goal"
+            formControlName="goal"
+            required
+          >
             <option value="" default disabled>Select option</option>
-            <option *ngFor="let key of goalKeys" [value]="goals[key]">{{ key }}</option>
+            <option *ngFor="let key of goalKeys" [value]="goals[key]">
+              {{ key }}
+            </option>
           </select>
         </div>
-
+        <!-- Target Weight -->
+        <div class="mb-3">
+          <label class="form-label" for="targetWeight">
+            <i class="fas fa-weight-scale"></i> Target Weight (kg)
+          </label>
+          <input
+            type="number"
+            class="form-control"
+            id="targetWeight"
+            name="targetWeight"
+            formControlName="targetWeight"
+            placeholder="Enter your target weight"
+            required
+          />
+          <p
+            *ngIf="userInfoForm.get('targetWeight')?.hasError('targetWeight')"
+            class="text-danger"
+          >
+            *Target Weight Must be appropriate with goal
+          </p>
+        </div>
         <!-- Calories (Optional) -->
         <div class="mb-3">
           <label class="form-label"
@@ -127,7 +164,11 @@
         </div>
 
         <!-- Submit Button -->
-        <button type="submit" class="btn btn-primary w-50 mt-3 d-block m-auto">
+        <button
+          [disabled]="userInfoForm.invalid"
+          type="submit"
+          class="btn btn-primary w-50 mt-3 d-block m-auto"
+        >
           <i class="fas fa-paper-plane"></i> Submit
         </button>
       </form>

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { CanActivate, Router } from '@angular/router';
+import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { UserService } from '../services/user.service';
 
@@ -11,9 +11,10 @@ export class AuthGuard implements CanActivate {
 
   canActivate(): boolean {
     const token = this._userSer.getCookie('accessToken'); // Check if token exists
-    
     if (!token) {
-      this.router.navigate(['/login']); // Redirect to login if not signed in
+      this.router.navigate(['/login'] , {
+        state : {fromGuard : "Please Login First"}
+      });
       return false;
     }
     return true;

@@ -44,16 +44,7 @@ export class UserService {
     } 
   }
   signUp(user: IUser): Observable<any> {
-    return this.http.post(`${this.baseUrl}/user/register`, user).pipe(
-      catchError((error) => {
-        return throwError(
-          () =>
-            new Error(
-              error.error?.message || 'sign up failed. Please try again.'
-            )
-        );
-      })
-    );
+    return this.http.post(`${this.baseUrl}/user/register`, user)
   }
 
   login(user: IUser): Observable<any> {
@@ -123,4 +114,43 @@ export class UserService {
         })
       );
   }
+  getUserInfo(): Observable<any> {
+    const token = this._authService.getToken();
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+    });
+    return this.http.get(`${this.baseUrl}/user/info`, { headers }).pipe(
+      map((res) => {
+        return res;
+      }),
+      catchError((error) => {
+        return throwError(
+          () =>
+            new Error(
+              error?.message ||
+                'Fetching your information failed ! Please try again.'
+            )
+        );
+      })
+    );
+  }
+  updateUserInfo(userInfo: UserInfoSchema): Observable<any> {
+    const token = this._authService.getToken();
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+    });
+    return this.http
+      .patch(`${this.baseUrl}/user/info`, userInfo, { headers })
+      .pipe(
+        catchError((error) => {
+          return throwError(
+            () =>
+              new Error(
+                error?.message ||
+                  'Updating your information failed ! Please try again.'
+              )
+          );
+        })
+      );
+    }
 }

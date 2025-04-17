@@ -18,12 +18,11 @@ export class ServicesComponent implements OnInit {
         icon: "fa-solid fa-robot",
         title: "AI Chatbot",
         description:
-          "Intelligent conversational assistant that provides personalized nutrition advice, meal planning, and answers health-related questions in real-time.",
+          "AI-powered chatbot for personalized nutrition advice.",
         features: [
           "Natural language processing",
           "Personalized recommendations",
           "24/7 availability",
-          "Continuous learning",
         ],
         link:"/chatbot"
       },
@@ -32,12 +31,11 @@ export class ServicesComponent implements OnInit {
         icon: "fa-solid fa-calculator",
         title: "Calories Calculation System",
         description:
-          "Precise calorie tracking system that helps users monitor daily intake and achieve their health goals with detailed nutritional breakdowns.",
+          "Accurate calorie tracker with detailed nutrition info.",
         features: [
           "Custom goal setting",
           "Macro & micronutrient tracking",
           "Progress visualization",
-          "Diet plan integration",
         ],
         link:"/user-info"
       },
@@ -46,12 +44,11 @@ export class ServicesComponent implements OnInit {
         icon: "fa-solid fa-camera",
         title: "Meal Recognition",
         description:
-          "Advanced image recognition technology that identifies foods from photos, making meal logging quick and effortless for busy lifestyles.",
+          "Image Recognition and Detection Model for fast results.",
         features: [
           "Instant food identification",
           "Portion size estimation",
           "Multiple food detection",
-          "Restaurant menu scanning",
         ],
         link:"/meal-detection"
       },
@@ -60,12 +57,11 @@ export class ServicesComponent implements OnInit {
         icon: "fa-solid fa-utensils",
         title: "Nutrition In-Detail",
         description:
-          "Comprehensive nutrition analysis providing in-depth insights about vitamins, minerals, and other essential nutrients for optimal health management.",
+          "Detailed nutrition insights on vitamins, minerals, and key nutrients for better health.",
         features: [
           "Detailed nutrient profiles",
           "Dietary deficiency alerts",
           "Personalized recommendations",
-          "Scientific insights",
         ],
         link:"/nutrition"
       },

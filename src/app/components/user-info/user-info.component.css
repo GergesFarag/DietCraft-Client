@@ -1,6 +1,15 @@
 body {
     background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
 }
+.cardio-img{
+    width: 70%;
+    height: auto;
+}
+.container.parent{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 .card {
     border-radius: 15px;
     background: #fff;
@@ -27,4 +36,20 @@ body {
 .btn-primary:hover {
     background: linear-gradient(90deg, #6610f2, #007bff);
     transform: scale(1.05);
+}
+@media (max-width: 768px) {
+    .container.parent{
+        flex-direction: column;
+        align-items: center;
+    }
+    .card {
+        width: 90%;
+    }
+    .btn-primary {
+        width: 100%;
+    }
+    .form-control, .form-select {
+        width: 100%;
+    }
+    
 }

@@ -6,6 +6,39 @@
   background-color: var(--background-color);
   font-family: var(--default-font);
   color: var(--default-color);
+  position: relative;
+  overflow: hidden;
+}
+.services-section::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 60%;
+  height: 30%;
+  background-color: rgb(216, 215, 215);
+  transform: rotate(45deg) scaleX(5);
+  opacity: 0.3;
+  box-shadow: 0 0 20px 10px white;
+  animation: move 1s linear;
+}
+
+@keyframes move {
+  0% {
+    top: 100%;
+    left: -100%;
+    opacity: 0;
+  }
+  50% {
+    top: 50%;
+    left: 50%;
+    opacity: 0.6;
+  }
+  100% {
+    top: -30%;
+    left: 100%;
+    opacity: 0;
+  }
 }
 
 .container {
@@ -47,7 +80,9 @@
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 20px;
 }
-
+.align{
+  grid-column: 2/3;
+}
 .service-card {
   background-color: var(--surface-color);
   border-radius: 12px;

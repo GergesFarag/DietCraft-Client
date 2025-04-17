@@ -10,6 +10,7 @@ import { ServicesComponent } from "./components/services/services.component";
 import { MealDetectionComponent } from "./components/meal-detection/meal-detection.component";
 import { ContactComponent } from "./components/contact/contact.component";
 import { AboutComponent } from "./components/about/about.component";
+import { UserProfileComponent } from "./components/user-profile/user-profile.component";
 
 const routes: Routes = [
   { path: "", redirectTo: "/home", pathMatch: "full" }, // Redirect to home by default
@@ -28,6 +29,7 @@ const routes: Routes = [
       { path: "meal-detection", component: MealDetectionComponent },
     ],
   },
+  {path: "profile" , component:UserProfileComponent , canActivate: [AuthGuard]},
   { path: "contact", component: ContactComponent },
   { path: "about", component: AboutComponent },
   { path: "**", redirectTo: "/home" },

@@ -6,139 +6,144 @@
       <span class="r s"></span>
       <span class="r"></span>
     </div>
-    <div class="row card rounded-4 p-3 flex-row w-100 m-auto glassmorphism my-4 justify-content-center">
+    <div
+      class="row card rounded-4 p-3 flex-row w-100 m-auto glassmorphism my-4 justify-content-center"
+    >
       <i class="fa fa-user-plus my-2 pt-3"></i>
       <h3 class="text-center my-3">Sign Up</h3>
 
-    <!-- Sign-Up Form -->
-    <div class="col-lg-6 card-body">
-      <form [formGroup]="signUpForm" (ngSubmit)="signupUser()">
-        <!-- Username -->
-        <div class="form-floating mb-4">
-          <input
-            id="username"
-            formControlName="username"
-            class="form-control"
-            placeholder="Username"
-          />
-          <label for="username"><i class="fas fa-user"></i> Username</label>
-          <div *ngIf="isInvalid('username')" class="text-danger">
-            <small *ngIf="signUpForm.get('username')?.hasError('required')"
-              >Username is required.</small
+      <!-- Sign-Up Form -->
+      <div class="col-lg-6 card-body">
+        <form [formGroup]="signUpForm" (ngSubmit)="signupUser()">
+          <!-- Username -->
+          <div class="form-floating mb-4">
+            <input
+              id="username"
+              formControlName="username"
+              class="form-control"
+              placeholder="Username"
+            />
+            <label for="username"><i class="fas fa-user"></i> Username</label>
+            <div *ngIf="isInvalid('username')" class="text-danger">
+              <small *ngIf="signUpForm.get('username')?.hasError('required')"
+                >Username is required.</small
+              >
+              <small *ngIf="signUpForm.get('username')?.hasError('minlength')"
+                >Must be at least 4 characters.</small
+              >
+            </div>
+          </div>
+
+          <!-- Email -->
+          <div class="form-floating mb-4">
+            <input
+              id="email"
+              formControlName="email"
+              class="form-control"
+              placeholder="Email"
+            />
+            <label for="email"><i class="fas fa-envelope"></i> Email</label>
+            <div *ngIf="isInvalid('email')" class="text-danger">
+              <small *ngIf="signUpForm.get('email')?.hasError('required')"
+                >Email is required.</small
+              >
+              <small *ngIf="signUpForm.get('email')?.hasError('email')"
+                >Invalid email address.</small
+              >
+            </div>
+          </div>
+
+          <!-- Password -->
+          <div class="form-floating mb-4 password-container">
+            <input
+              [type]="passwordFieldType"
+              id="password"
+              formControlName="password"
+              class="form-control"
+              placeholder="Password"
+            />
+            <label for="password"><i class="fas fa-lock"></i> Password</label>
+            <span (click)="toggleVisibility()">
+              <i
+                class="toggle-password fas"
+                [ngClass]="
+                  passwordFieldType !== 'password' ? 'fa-eye' : 'fa-eye-slash'
+                "
+              ></i>
+            </span>
+            <div *ngIf="isInvalid('password')" class="text-danger">
+              <small *ngIf="signUpForm.get('password')?.hasError('required')"
+                >Password is required*</small
+              >
+              <small
+                *ngIf="
+                  signUpForm.get('password')?.hasError('minlength') ||
+                  signUpForm.get('password')?.hasError('pattern')
+                "
+                >At least 8 characters with digit , special character and upper case
+                letter*</small
+              >
+            </div>
+          </div>
+
+          <!-- Confirm Password -->
+          <div class="form-floating mb-4 password-container">
+            <input
+              [type]="passwordFieldType"
+              id="confirmPassword"
+              formControlName="confirmPassword"
+              class="form-control"
+              placeholder="Confirm Password"
+            />
+            <label for="confirmPassword"
+              ><i class="fas fa-key"></i> Confirm Password</label
             >
-            <small *ngIf="signUpForm.get('username')?.hasError('minlength')"
-              >Must be at least 4 characters.</small
+            <span (click)="toggleVisibility()">
+              <i class="toggle-password fas {{ iClass }}"></i>
+            </span>
+            <div
+              *ngIf="signUpForm.get('confirmPassword')?.errors?.['mismatch'] && signUpForm.get('confirmPassword')?.touched"
+              class="text-danger ml-3"
+            >
+              <small>Passwords do not match*</small>
+            </div>
+          </div>
+
+          <!-- Terms Checkbox -->
+          <div class="form-check mb-3">
+            <input
+              class="form-check-input"
+              type="checkbox"
+              formControlName="checked"
+            />
+            <label class="form-check-label text-muted"
+              >I agree to the <a href="#">Terms of Service</a></label
             >
           </div>
-        </div>
 
-        <!-- Email -->
-        <div class="form-floating mb-4">
-          <input
-            id="email"
-            formControlName="email"
-            class="form-control"
-            placeholder="Email"
-          />
-          <label for="email"><i class="fas fa-envelope"></i> Email</label>
-          <div *ngIf="isInvalid('email')" class="text-danger">
-            <small *ngIf="signUpForm.get('email')?.hasError('required')"
-              >Email is required.</small
-            >
-            <small *ngIf="signUpForm.get('email')?.hasError('email')"
-              >Invalid email address.</small
-            >
+          <!-- Error Message -->
+          <div *ngIf="errorMessage" class="alert alert-danger text-center">
+            {{ errorMessage }}
           </div>
-        </div>
 
-        <!-- Password -->
-        <div class="form-floating mb-4 password-container">
-          <input
-            [type]="passwordFieldType"
-            id="password"
-            formControlName="password"
-            class="form-control"
-            placeholder="Password"
-          />
-          <label for="password"><i class="fas fa-lock"></i> Password</label>
-          <span (click)="toggleVisibility()">
-            <i
-              class="toggle-password fas"
-              [ngClass]="
-                passwordFieldType !== 'password' ? 'fa-eye' : 'fa-eye-slash'
-              "
-            ></i>
-          </span>
-          <div *ngIf="isInvalid('password')" class="text-danger">
-            <small *ngIf="signUpForm.get('password')?.hasError('required')"
-              >Password is required*</small
+          <!-- Sign Up Button -->
+          <div class="text-center m-4">
+            <button
+              type="submit"
+              class="btn neon-button w-100"
+              [disabled]="signUpForm.invalid"
             >
-            <small *ngIf="signUpForm.get('password')?.hasError('minlength')"
-              >At least 8 characters*</small
-            >
+              <i class="fas fa-paper-plane"></i> Sign Up
+            </button>
           </div>
-        </div>
 
-        <!-- Confirm Password -->
-        <div class="form-floating mb-4 password-container">
-          <input
-            [type]="passwordFieldType"
-            id="confirmPassword"
-            formControlName="confirmPassword"
-            class="form-control"
-            placeholder="Confirm Password"
-          />
-          <label for="confirmPassword"
-            ><i class="fas fa-key"></i> Confirm Password</label
-          >
-          <span (click)="toggleVisibility()">
-            <i
-              class="toggle-password fas {{iClass}}"
-              
-            ></i>
-          </span>
-          <div
-            *ngIf="signUpForm.get('confirmPassword')?.errors?.['mismatch'] && signUpForm.get('confirmPassword')?.touched"
-            class="text-danger ml-3"
-          >
-            <small>Passwords do not match*</small>
+          <div class="text-center">
+            <p class="text-muted">
+              Already a member? <a routerLink="/login">Login</a>
+            </p>
           </div>
-        </div>
-
-        <!-- Terms Checkbox -->
-        <div class="form-check mb-3">
-          <input
-            class="form-check-input"
-            type="checkbox"
-            formControlName="checked"
-          />
-          <label class="form-check-label text-muted"
-            >I agree to the <a href="#">Terms of Service</a></label
-          >
-        </div>
-
-        <!-- Error Message -->
-        <div *ngIf="errorMessage" class="alert alert-danger text-center">
-          {{ errorMessage }}
-        </div>
-
-        <!-- Sign Up Button -->
-        <div class="text-center m-4">
-          <button
-            type="submit"
-            class="btn neon-button w-100"
-            [disabled]="signUpForm.invalid"
-          >
-            <i class="fas fa-paper-plane"></i> Sign Up
-          </button>
-        </div>
-
-        <div class="text-center">
-         <p class="text-muted">
-           Already a member? <a routerLink="/login">Login</a>
-         </p>
-        </div>
-      </form>
+        </form>
+      </div>
     </div>
   </div>
 </div>
