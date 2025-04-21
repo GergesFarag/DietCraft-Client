@@ -20,7 +20,7 @@
               </ul>
             </div>
   
-            <a routerLink="/services/{{ service.link }}" class="learn-more-btn"
+            <a routerLink="/services/{{ service.link }}" [queryParams]="queryParams" class="learn-more-btn"
               >Explore it</a
             >
           </div>

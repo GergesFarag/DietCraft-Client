@@ -195,12 +195,18 @@
 /* Media Queries */
 @media (max-width: 991px) {
   .services-grid {
-    grid-template-columns: repeat(2, 1fr);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
   }
 }
 @media (max-width: 767px) {
   .services-grid {
-    grid-template-columns: 1fr;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
   }
   .service-card {
     max-width: 400px;

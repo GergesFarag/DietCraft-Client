@@ -93,6 +93,7 @@ export class SignupComponent {
             response.data.user.refreshToken
           );
           this.userService.setUserInLS(user);
+          localStorage.setItem('profileImage', '/images/logo-sm.png');
           this.router.navigate(["/"]);
         } else {
           console.log("Gone Here in Debugggggg");

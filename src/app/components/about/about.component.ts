@@ -1,26 +1,28 @@
-import { Component } from '@angular/core';
+import { Component } from "@angular/core";
 
 @Component({
-  selector: 'app-about',
+  selector: "app-about",
   standalone: false,
-  templateUrl: './about.component.html',
-  styleUrl: './about.component.css',
+  templateUrl: "./about.component.html",
+  styleUrl: "./about.component.css",
 })
 export class AboutComponent {
   aboutInfo = {
     title: "DIET CRAFT",
-    motivation: "Our innovative project aims to simplify the journey toward better nutrition by providing a comprehensive platform that helps individuals create a healthy and effective diet tailored to their needs. By offering  an extensive database of foods with comparable nutritional values, users can easily explore alternatives that fit their dietary goals. Additionally, our advanced search functionality allows for targeted inquiries based on specific health values, enabling personalized recommendations that empower users to make informed choices for a balanced lifestyle.",
+    motivation:
+      "Diet Craft simplifies healthy eating by offering a platform with food alternatives and personalized recommendations based on nutritional values.",
     objectives: [
-      'Generation of efficient diet plans and suggest food.',
-      'Providing knowledge for basics of healthy life style.',
-      'Food categorization  with nutritional values.',
-      'Searching for food contains wanted nutritional values.',
+      "Create smart diet plans.",
+      "Promote healthy lifestyle basics.",
+      "Categorize foods by nutrition.",
+      "Search foods by nutrients.",
     ],
-    conclusion:"Whether you’re looking to lose weight, gain energy, or simply eat healthier, our project is designed to support you every step of the way."
+    conclusion:
+      "Whether your goal is weight loss, more energy, or better health, we’re here to help.",
   };
-  milestones: {year:number , description:string}[] = [
-    { year: 2010, description: 'Company founded with a vision for innovation.' },
-    { year: 2015, description: 'Launched our flagship product.' },
-    { year: 2020, description: 'Expanded to international markets.' }
+  milestones: { year: number; description: string }[] = [
+    { year: 2010, description: "Founded with a vision for innovation." },
+    { year: 2015, description: "Released our main product." },
+    { year: 2020, description: "Entered global markets." },
   ];
 }

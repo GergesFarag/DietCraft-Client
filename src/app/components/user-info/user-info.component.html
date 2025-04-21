@@ -65,7 +65,7 @@
               id="gender"
               formControlName="gender"
               id="male"
-              value="true"
+              [value]="true"
               checked
             />
             <label class="btn btn-outline-primary" for="male"
@@ -103,8 +103,8 @@
             required
           >
             <option value="" default disabled>Select option</option>
-            <option value="{{ l }}" *ngFor="let l of activityLevel">
-              {{ l }}
+            <option *ngFor="let l of activityLevel" [value]="l">
+              {{ l | titlecase }}
             </option>
           </select>
         </div>

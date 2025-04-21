@@ -35,7 +35,8 @@ import { DoubleSizeDirective } from './directives/double-size.directive';
 import { MealDetectionComponent } from './components/meal-detection/meal-detection.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ContactComponent } from './components/contact/contact.component';
-import { UserProfileComponent } from './components/user-profile/user-profile.component'; // Import the animations module
+import { UserProfileComponent } from './components/user-profile/user-profile.component';
+import { NutritionComponent } from './components/nutrition/nutrition.component'; // Import the animations module
 
 @NgModule({
   declarations: [
@@ -62,6 +63,7 @@ import { UserProfileComponent } from './components/user-profile/user-profile.com
     MealDetectionComponent,
     ContactComponent,
     UserProfileComponent,
+    NutritionComponent,
   ],
   imports: [
     BrowserModule,

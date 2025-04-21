@@ -68,7 +68,8 @@ export class LoginComponent implements OnDestroy {
           let user:IUserVM = {
             username : response.data.user.username,
             email : response.data.user.email,
-            isAdmin : response.data.user.isAdmin
+            isAdmin : response.data.user.isAdmin,
+            profileImage : '/images/logo-sm.png'
           }
           this.authService.setToken(response.data.accessToken)
           this.userService.setCookie('refreshToken',response.data.user.refreshToken)  

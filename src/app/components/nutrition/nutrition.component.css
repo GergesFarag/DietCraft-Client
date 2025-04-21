@@ -1,0 +1,315 @@
+/* nutrition.component.scss */
+@import url("https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap");
+@import url("https://fonts.googleapis.com/icon?family=Material+Icons");
+:host {
+  --background-color: #ffffff;
+  --default-color: #444444;
+  --heading-color: #5f687b;
+  --accent-color: #10bc69;
+  --surface-color: #ffffff;
+  --contrast-color: #ffffff;
+  --hover-color: #10bc69;
+  --unhealthy-color: #ff4b4b;
+  --protein-color: #4c6ef5;
+  --carbs-color: #fcc419;
+  --fat-color: #fa5252;
+  --fiber-color: #40c057;
+  --sugar-color: #f06595;
+  font-family: "Ubuntu", serif;
+  color: var(--default-color);
+}
+
+.nutrition-container {
+  max-width: 1200px;
+  min-height: 90vh;
+  margin: 0 auto;
+  padding: 2rem;
+  background-color: var(--background-color);
+}
+
+.search-section {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+.search-section h1 {
+  color: var(--heading-color);
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+  font-weight: 700;
+}
+.search-section .subtitle {
+  color: var(--default-color);
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+  font-weight: 300;
+}
+.search-button {
+  background-color: var(--accent-color);
+  color: var(--contrast-color);
+  /* flex-shrink: 1; */
+  padding: 0.8rem;
+  width: 20%;
+  border-radius: 50px;
+  font-size: 1.1rem;
+  font-weight: 500;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.search-button:hover {
+  background-color: var(--hover-color) !important;
+  box-shadow: 0 5px 20px rgba(16, 188, 105, 0.5);
+}
+.search-box {
+  position: relative;
+  margin: 0 auto;
+  max-width: 700px;
+  /* flex-grow: 1; */
+}
+.search-box .search-input {
+  width: 100%;
+  padding: 0.8rem 1.5rem;
+  border-radius: 50px;
+  border: 2px solid #eaeaea;
+  font-size: 1.1rem;
+  transition: all 0.3s ease;
+  font-family: "Ubuntu", serif;
+  color: var(--default-color);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+}
+.search-box .search-input:focus {
+  outline: none;
+  border-color: var(--accent-color);
+  box-shadow: 0 5px 20px rgba(16, 188, 105, 0.15);
+}
+.search-box .search-results {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: var(--surface-color);
+  border-radius: 10px;
+  margin-top: 0.5rem;
+  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  z-index: 10;
+}
+.search-box .search-results .search-result-item {
+  padding: 1rem 1.5rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-transform: capitalize;
+}
+.search-box .search-results .search-result-item:hover {
+  background-color: rgba(16, 188, 105, 0.1);
+  color: var(--accent-color);
+}
+
+.results-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.health-status-indicator {
+  width: 100%;
+  padding: 1.2rem;
+  border-radius: 10px;
+  color: var(--contrast-color);
+  margin-bottom: 2rem;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  text-align: center;
+}
+.health-status-indicator .status-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+  font-weight: 500;
+}
+.health-status-indicator .status-content .status-icon {
+  margin-right: 0.8rem;
+  display: flex;
+  align-items: center;
+}
+.health-status-indicator .status-content .status-icon .material-icons {
+  font-size: 2rem;
+}
+
+.nutrition-card {
+  width: 100%;
+  background-color: var(--surface-color);
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  padding: 2rem;
+}
+.nutrition-card h2 {
+  color: var(--heading-color);
+  text-align: center;
+  margin-bottom: 2rem;
+  font-size: 1.8rem;
+}
+.nutrition-card .nutrition-info {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+.nutrition-card .nutrition-overview {
+  flex: 1;
+  min-width: 250px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+.nutrition-card .macro-circle {
+  position: relative;
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  background-color: #f8f9fa;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.nutrition-card .circle-segment {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  transform-origin: 50% 50%;
+}
+.nutrition-card .circle-segment.protein {
+  background-color: var(--protein-color);
+  clip-path: polygon(50% 50%, 50% 0%, var(--percentage) 0%, var(--percentage) var(--percentage));
+  transform: rotate(0deg);
+}
+.nutrition-card .circle-segment.carbs {
+  background-color: var(--carbs-color);
+  clip-path: polygon(50% 50%, var(--percentage) 0%, 100% 0%, 100% var(--percentage));
+  transform: rotate(120deg);
+}
+.nutrition-card .circle-segment.fat {
+  background-color: var(--fat-color);
+  clip-path: polygon(50% 50%, var(--percentage) 0%, 100% 0%, 100% var(--percentage));
+  transform: rotate(240deg);
+}
+.nutrition-card .circle-segment .segment-label {
+  position: absolute;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: white;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+.nutrition-card .circle-segment .segment-label.protein {
+  top: 30px;
+  right: 65px;
+}
+.nutrition-card .circle-segment .segment-label.carbs {
+  top: 120px;
+  right: 20px;
+}
+.nutrition-card .circle-segment .segment-label.fat {
+  bottom: 30px;
+  left: 65px;
+}
+.nutrition-card .calories-display {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.nutrition-card .calories-display .calories-value {
+  font-size: 3rem;
+  font-weight: 700;
+  color: var(--heading-color);
+  line-height: 1;
+}
+.nutrition-card .calories-display .calories-label {
+  font-size: 1.2rem;
+  color: var(--default-color);
+  margin-top: 0.3rem;
+}
+.nutrition-card .calories-display .per-serving {
+  font-size: 0.9rem;
+  color: #868e96;
+  margin-top: 0.2rem;
+}
+.nutrition-card .nutrition-details {
+  flex: 1.5;
+  min-width: 300px;
+}
+.nutrition-card .nutrient-bar {
+  display: grid;
+  grid-template-columns: 120px 1fr 60px;
+  align-items: center;
+  margin-bottom: 1.2rem;
+  gap: 1rem;
+}
+.nutrition-card .nutrient-bar.highlight {
+  padding: 0.8rem;
+  border-radius: 8px;
+  background-color: rgba(95, 104, 123, 0.05);
+}
+.nutrition-card .nutrient-bar .nutrient-label {
+  font-weight: 500;
+  color: var(--heading-color);
+}
+.nutrition-card .nutrient-bar .bar-container {
+  background-color: #f1f3f5;
+  height: 12px;
+  border-radius: 6px;
+  overflow: hidden;
+}
+.nutrition-card .nutrient-bar .bar-fill {
+  height: 100%;
+  border-radius: 6px;
+  transition: width 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.nutrition-card .nutrient-bar .bar-fill.protein {
+  background-color: var(--protein-color);
+}
+.nutrition-card .nutrient-bar .bar-fill.carbs {
+  background-color: var(--carbs-color);
+}
+.nutrition-card .nutrient-bar .bar-fill.fat {
+  background-color: var(--fat-color);
+}
+.nutrition-card .nutrient-bar .bar-fill.fiber {
+  background-color: var(--fiber-color);
+}
+.nutrition-card .nutrient-bar .bar-fill.sugar {
+  background-color: var(--sugar-color);
+}
+.nutrition-card .nutrient-bar .bar-fill.sat-fat {
+  background-color: var(--accent-color);
+}
+.nutrition-card .nutrient-bar .bar-fill.sat-fat.unhealthy {
+  background-color: var(--unhealthy-color);
+}
+.nutrition-card .nutrient-bar .nutrient-value {
+  text-align: right;
+  font-weight: 500;
+}
+
+@media (max-width: 768px) {
+  .nutrition-container {
+    padding: 1rem;
+  }
+  .search-section h1 {
+    font-size: 2rem;
+  }
+  .nutrition-card {
+    padding: 1.5rem;
+  }
+  .nutrition-card h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+  .macro-circle {
+    width: 180px !important;
+    height: 180px !important;
+  }
+  .calories-display .calories-value {
+    font-size: 2.5rem;
+  }
+}

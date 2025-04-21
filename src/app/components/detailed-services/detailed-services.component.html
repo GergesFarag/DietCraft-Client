@@ -1,46 +1,32 @@
-<!-- Services Section -->
-<section id="services" class="services section light-background my-5 py-2">
-  <!-- Section Title -->
-  <div class="container section-title" data-aos="fade-up">
-    <h2>Services</h2>
-  </div>
-  <!-- End Section Title -->
-
-  <div class="container my-5">
-    <div class="row gy-4">
-      <div class="col-lg-6 col-md-6" data-aos="fade-up" data-aos-delay="100">
-        <div class="service-item position-relative">
-          <div class="icon">
-            <i class="bi bi-robot"></i>
+<!-- featured-services.component.html -->
+<section id="featured-services" class="featured-services section">
+  <div class="bg-pattern pattern-1"></div>
+  <div class="bg-pattern pattern-2"></div>
+  <div class="container">
+    <div class="section-heading">
+      <h2 class="section-title">Explore New Possibilities</h2>
+      <div class="title-underline"></div>
+    </div>
+    <div class="services-grid">
+      <div 
+        class="service-card" 
+        data-aos="fade-up" 
+        [attr.data-aos-delay]="100 + (i * 100)" 
+        *ngFor="let f of featuredServices; let i = index"
+      >
+        <div class="service-card-inner">
+          <div class="service-icon">
+            <div class="icon-background"></div>
+            <i class="bi {{ f.icon }}"></i>
           </div>
-          <a routerLink="/services/chatbot" class="stretched-link">
-            <h3>ChatBot Assistant</h3>
-          </a>
-          <p>
-            Dedicated ChatBot Assistant for your Lifestyle and Health Care ,
-            which can help you in your daily life. Try it now.
-          </p>
+          <h4 class="service-title">
+            <a [routerLink]="f.link" class="service-link">{{ f.title }}</a>
+          </h4>
+          <p class="service-description">{{ f.details }}</p>
+          <a [routerLink]="f.link" class="read-more">Learn more <i class="bi bi-arrow-right"></i></a>
+          <div class="card-hover-effect"></div>
         </div>
       </div>
-      <!-- End Service Item -->
-
-      <div class="col-lg-6 col-md-6" data-aos="fade-up" data-aos-delay="200">
-        <div class="service-item position-relative">
-          <div class="icon">
-            <i class="bi bi-broadcast"></i>
-          </div>
-          <a href="/services/user-info" class="stretched-link">
-            <h3>Calorie Calculation System</h3>
-          </a>
-          <p>
-            This system will help you maintain diet and health. It will help you
-            Claculate your daily calorie intake and maintain a healthy diet.
-          </p>
-        </div>
-      </div>
-      <!-- End Service Item -->
-       <app-button appDoubleSize="7" label="Explore more !" [Action]="navigateToServices" classes="mt-5" class="text-center"></app-button>
     </div>
   </div>
 </section>
-<!-- /Services Section -->

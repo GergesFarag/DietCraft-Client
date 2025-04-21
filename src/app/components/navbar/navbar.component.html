@@ -18,13 +18,29 @@
       <nav class="navmenu">
         <ul>
           <li *ngFor="let link of navLinks">
-            <a [routerLink]="link.url" (click)="hideMobileNav()" routerLinkActive="active">{{
-              link.label
-            }}</a>
+            <a
+              [routerLink]="link.url"
+              (click)="hideMobileNav()"
+              routerLinkActive="active"
+              >{{ link.label }}</a
+            >
           </li>
           <li *ngIf="isLoggedIn">
-            <a [routerLink]="['/profile']" (click)="hideMobileNav()" routerLinkActive="active">
-              <i class="fa fa-user-circle fs-2"></i>
+            <a
+            class="rounded-circle profile-image"
+              [routerLink]="['/profile']"
+              (click)="hideMobileNav()"
+              routerLinkActive="active"
+            >
+              <i *ngIf="!profileImage" class="fa-solid fa-user me-2"></i>
+              <img
+                *ngIf="profileImage"
+                [src]="profileImage"
+                alt="ImageProfile"
+                class="rounded-circle"
+                width="30px"
+                height="30px"
+              />
             </a>
           </li>
 
@@ -44,17 +60,17 @@
             Logout
             <i class="fa fa-sign-out"></i>
           </button>
-            <div class="confirmation-message" *ngIf="loggingOut()">
-              <app-confirmation
-                message="Are You Sure To Logout ?"
-                iconClass="fa-solid fa-arrow-right-from-bracket"
-                iconColor="red"
-                head="Confirmation"
-                [confirmAction]="confirmLogout"
-                [cancelAction]="toggleLogout"
-                #confirmElement
-              ></app-confirmation>
-            </div>
+          <div class="confirmation-message" *ngIf="loggingOut()">
+            <app-confirmation
+              message="Are You Sure To Logout ?"
+              iconClass="fa-solid fa-arrow-right-from-bracket"
+              iconColor="red"
+              head="Confirmation"
+              [confirmAction]="confirmLogout"
+              [cancelAction]="toggleLogout"
+              #confirmElement
+            ></app-confirmation>
+          </div>
         </ul>
       </nav>
     </div>

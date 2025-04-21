@@ -8,4 +8,5 @@ export interface IUser {
   isActive?: boolean;
   refreshToken?: string;
   userData?: UserInfoSchema;
+  profileImage?:string;
 }

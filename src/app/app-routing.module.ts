@@ -11,6 +11,7 @@ import { MealDetectionComponent } from "./components/meal-detection/meal-detecti
 import { ContactComponent } from "./components/contact/contact.component";
 import { AboutComponent } from "./components/about/about.component";
 import { UserProfileComponent } from "./components/user-profile/user-profile.component";
+import { NutritionComponent } from "./components/nutrition/nutrition.component";
 
 const routes: Routes = [
   { path: "", redirectTo: "/home", pathMatch: "full" }, // Redirect to home by default
@@ -21,15 +22,35 @@ const routes: Routes = [
   { path: "chatbot", component: ChatBotComponent, canActivate: [AuthGuard] }, // Protected route for chatbot
   {
     path: "services",
-    component: ServicesComponent,
-    canActivate: [AuthGuard], // Protected route for services
+    component: ServicesComponent, // Protected route for services
     children: [
-      { path: "user-info", component: UserInfoComponent },
-      { path: "chatbot", component: ChatBotComponent },
-      { path: "meal-detection", component: MealDetectionComponent },
+      {
+        path: "user-info",
+        component: UserInfoComponent,
+        canActivate: [AuthGuard],
+      },
+      {
+        path: "chatbot",
+        component: ChatBotComponent,
+        canActivate: [AuthGuard],
+      },
+      {
+        path: "meal-detection",
+        component: MealDetectionComponent,
+        canActivate: [AuthGuard],
+      },
+      {
+        path: "nutrition",
+        component: NutritionComponent,
+        canActivate: [AuthGuard],
+      },
     ],
   },
-  {path: "profile" , component:UserProfileComponent , canActivate: [AuthGuard]},
+  {
+    path: "profile",
+    component: UserProfileComponent,
+    canActivate: [AuthGuard],
+  },
   { path: "contact", component: ContactComponent },
   { path: "about", component: AboutComponent },
   { path: "**", redirectTo: "/home" },

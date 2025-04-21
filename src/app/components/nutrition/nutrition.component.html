@@ -1,0 +1,98 @@
+<!-- nutrition.component.html -->
+<div class="nutrition-container">
+  <div class="search-section">
+    <h1>Nutrition Detective</h1>
+    <p class="subtitle">Discover the nutritional content of your favorite foods</p>
+    
+    <div class="search-box d-flex align-items-center align-items-center gap-2">
+      <input 
+        type="text" 
+        [formControl]="searchControl" 
+        placeholder="Enter a food name (e.g., apple, banana)"
+        class="search-input"
+      >
+      <button class="search-button" (click)="searchFood()">
+        Search
+        <i class="fa-solid fa-search"></i>
+      </button>
+    </div>
+  </div>
+
+  <div class="results-section" *ngIf="selectedFood" @fadeIn>
+    <div class="health-status-indicator" 
+         *ngIf="showHealthStatus"
+         [@pulseAnimation]="getHealthStatusClass()">
+      <div class="status-content">
+        <span class="status-icon">
+          <i class="material-icons">{{ selectedFood.isHealthy ? 'check_circle' : 'warning' }}</i>
+        </span>
+        <span class="status-text">{{ getHealthStatusText() }}</span>
+      </div>
+    </div>
+
+    <div class="nutrition-card">
+      <h2>{{ selectedFood.name | titlecase }}</h2>
+      <div class="nutrition-info">
+        <div class="nutrition-overview">
+          <div class="calories-display">
+            <span class="calories-value">{{ selectedFood.calories }}</span>
+            <span class="calories-label">calories</span>
+            <span class="per-serving">per 100g</span>
+          </div>
+        </div>
+
+        <div class="nutrition-details">
+          <div class="nutrient-bar">
+            <div class="nutrient-label">Protein</div>
+            <div class="bar-container">
+              <div class="bar-fill protein" 
+                   [style.width.%]="getNutrientPercentage(selectedFood.protein, 30)"
+                   @fadeIn></div>
+            </div>
+            <div class="nutrient-value">{{ selectedFood.protein }}g</div>
+          </div>
+
+          <div class="nutrient-bar">
+            <div class="nutrient-label">Carbs</div>
+            <div class="bar-container">
+              <div class="bar-fill carbs" 
+                   [style.width.%]="getNutrientPercentage(selectedFood.carbs, 60)"
+                   @fadeIn></div>
+            </div>
+            <div class="nutrient-value">{{ selectedFood.carbs }}g</div>
+          </div>
+
+          <div class="nutrient-bar">
+            <div class="nutrient-label">Fiber</div>
+            <div class="bar-container">
+              <div class="bar-fill fiber" 
+                   [style.width.%]="getNutrientPercentage(selectedFood.fiber, 10)"
+                   @fadeIn></div>
+            </div>
+            <div class="nutrient-value">{{ selectedFood.fiber }}g</div>
+          </div>
+          <div class="nutrient-bar">
+            <div class="nutrient-label">Total Fat</div>
+            <div class="bar-container">
+              <div class="bar-fill fat" 
+                   [style.width.%]="getNutrientPercentage(selectedFood.fat, 30)"
+                   @fadeIn></div>
+            </div>
+            <div class="nutrient-value">{{ selectedFood.fat }}g</div>
+          </div>
+
+          <div class="nutrient-bar highlight">
+            <div class="nutrient-label">Saturated Fat</div>
+            <div class="bar-container">
+              <div class="bar-fill sat-fat" 
+                   [class.unhealthy]="!selectedFood.isHealthy"
+                   [style.width.%]="getNutrientPercentage(selectedFood.saturatedFat, 20)"
+                   @fadeIn></div>
+            </div>
+            <div class="nutrient-value">{{ selectedFood.saturatedFat }}g</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

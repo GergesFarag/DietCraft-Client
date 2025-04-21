@@ -120,5 +120,9 @@
         <div class="image-container">
             <img [src]='imageSrc()' alt="Image After Processing">
         </div>
+        <h3 class="text-danger" *ngIf="itemPrediction === ''">*No Items Detected</h3>
+        <a *ngIf="itemPrediction !== ''" routerLink="/services/nutrition"[queryParams]="{searchItem : itemPrediction}">
+          <app-button appDoubleSize="5" label="Show Nutrients"></app-button>
+        </a>
       </div>
 </div>

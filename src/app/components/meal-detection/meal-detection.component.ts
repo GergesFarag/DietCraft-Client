@@ -1,5 +1,5 @@
 // image-uploader/image-uploader.component.ts
-import { Component, OnInit, signal, WritableSignal } from "@angular/core";
+import { Component, OnInit, Query, signal, WritableSignal } from "@angular/core";
 import {
   trigger,
   state,
@@ -8,6 +8,7 @@ import {
   transition,
 } from "@angular/animations";
 import { MealDetectionService } from "../../services/meal-detection.service";
+import { Router } from "@angular/router";
 
 @Component({
   selector: "app-meal-detection",
@@ -46,11 +47,12 @@ export class MealDetectionComponent implements OnInit {
   uploadComplete: boolean = false;
   uploadError: boolean = false;
   errorMessage: string = "";
+  itemPrediction:string = '';
   pulseState: string = "inactive";
   progressValue: number = 0;
   imageSrc: WritableSignal<string> = signal("");
 
-  constructor(private _mealDetectionService: MealDetectionService) {}
+  constructor(private _mealDetectionService: MealDetectionService , private router:Router) {}
 
   ngOnInit(): void {
     this.resetComponent();
@@ -117,7 +119,13 @@ export class MealDetectionComponent implements OnInit {
     this._mealDetectionService.detectMeal(this.selectedFile).subscribe({
       next: (response) => {
         if (response) {
+          console.log(response);
           this.imageSrc.update((_) => response.imageURL);
+          if(response.itemPrediction){
+            this.itemPrediction = response.itemPrediction;
+          }else{
+            this.itemPrediction = ''; 
+          }
           clearInterval(interval);
           this.isLoading = false;
           this.uploadComplete = true;
@@ -135,6 +143,11 @@ export class MealDetectionComponent implements OnInit {
   cancelUpload(): void {
     this.resetComponent();
   }
+  // navigateToNutrients(){
+  //   console.log(this.itemPrediction);
+  //   const queryParams = new Query();
+  //   this.router.navigate(['/services/nutrition'], { queryParams: { searchItem: this.itemPrediction } });
+  // }
 
   resetComponent(): void {
     this.selectedFile = null;

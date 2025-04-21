@@ -11,8 +11,9 @@ import { ActivatedRoute, Router } from "@angular/router";
   styleUrl: "./user-info.component.css",
 })
 export class UserInfoComponent {
-  activityLevel = ["Low", "Medium", "High"];
+  activityLevel = ["low", "medium", "high"];
   userInfoForm!: FormGroup;
+  isLoggenIn: boolean = false;
   errorMessage: string | null = null;
   goals = Goals;
   goalKeys = Object.keys(Goals).filter((key) =>
@@ -46,12 +47,13 @@ export class UserInfoComponent {
         this.isUpdate = true;
         this.userService.getUserInfo().subscribe((response) => {
           if (response.data) {
+            console.log(response.data.activityLevel);
             this.userInfoForm.patchValue({
               age: response.data.age,
               weight: response.data.weight,
               height: response.data.height,
               gender: response.data.gender,
-              activityLevel: this.activityLevel[+response.data.activityLevel],
+              activityLevel: (response.data.activityLevel as string),
               goal: response.data.goal,
               targetWeight: response.data.targetWeight,
               calories: response.data.calories,

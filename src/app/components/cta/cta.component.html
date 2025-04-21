@@ -1,28 +1,26 @@
 <!-- Call To Action Section -->
-<section id="call-to-action" class="call-to-action section accent-background">
+<section id="call-to-action" class="call-to-action section">
+  <div class="cta-background">
+    <div class="cta-shape cta-shape-1"></div>
+    <div class="cta-shape cta-shape-2"></div>
+  </div>
   <div class="container">
-    <div
-      class="row justify-content-center"
-      data-aos="zoom-in"
-      data-aos-delay="100"
-    >
-      <div class="col-xl-10">
-        <div class="text-center">
-          <h3>Start your healthy life Now</h3>
-          <p>
-            Discover a healthier, balanced life through mindful eating and daily
-            movement. At DietCraft, we guide you with nutritious meals and easy
-            home workouts designed to fit your lifestyle. Start your journey to
-            feeling better, one habit at a time.
-          </p>
-          <app-button
-            appDoubleSize="5"
-            label="Start Now"
-            [routerLink]="['/user-info']"
-          ></app-button>
-        </div>
+    <div class="cta-wrapper" data-aos="zoom-in" data-aos-duration="800">
+      <div class="cta-content">
+        <h3 class="cta-title">Start your healthy life Now</h3>
+        <p class="cta-text">
+          Discover a healthier, balanced life through mindful eating and daily
+          movement. At DietCraft, we guide you with nutritious meals and easy
+          home workouts designed to fit your lifestyle. Start your journey to
+          feeling better, one habit at a time.
+        </p>
+        <app-button
+          appDoubleSize="5"
+          label="Start Now"
+          [routerLink]="['/user-info']"
+          classes="cta-button"
+        ></app-button>
       </div>
     </div>
   </div>
 </section>
-<!-- /Call To Action Section -->

@@ -14,6 +14,7 @@ import { ConfirmationComponent } from "../confirmation/confirmation.component";
 export class NavbarComponent {
   isActive = false;
   isLoggedIn = false;
+  profileImage:any;
   loggingOut:WritableSignal<boolean>;
   navLinks = [
     { label: "Home", url: "/home", state: "" },
@@ -31,6 +32,7 @@ export class NavbarComponent {
       this.isLoggedIn = status;
     });
     this.loggingOut = this._userService.loggingOutSignal;
+    this.profileImage = localStorage.getItem("profileImage");
   }
   toggleMobileNav(): void {
     this.isActive = !this.isActive;
